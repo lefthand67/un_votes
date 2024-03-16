@@ -1,0 +1,22 @@
+Logs are bound into a system that you can use to track the way that the resolutions' details made from the website to the database. If you want to see how the given resolution was collected, all you need is to search these logs using the resolution.id which is the same as the "record" number in the resolution's url.
+
+1. scrapy.log
+- is the scrapy's crawler native log, where you can see the parsed urls and all the items it collected in the raw format.
+
+2. db_pipeline.log
+- is the stdout and stderr log developed by the maintainer to track the way of the raw items from the crawler to the database; here you can see the processed items and all the SQL commands executed on them.
+
+3. counter.log
+- is the statistics of the found, processed, sent to database and lost (not sent to database because of the some error) items, collected between the batches (runs) of the crawler (and total sums) that allow the maintainer to see how well the process went and be able to get noticed about the problems if they occur. You can see that there is 1 total lost item, its resolution.id (or "record" number, which is the same) can you find in the
+
+4. lost_records.log
+- This is where all the lost records ids are stored. You can copy this id, paste it into the form "https://digitallibrary.un.org/record/RECORD?ln=en" (where RECORD is the id from the log) and see the page of the resolution. Our 1 lost record is happened to be something strange for the database and looks like the some kind of the typo of the websites' maintainers. Also you can explore the db_pipeline.log or scrapy.log to see where the item broke the algorithm.
+
+5. check_suspicious.log
+- is the log for those who want to recheck the records with the the "suspicious" items, like missing agenda or committee report and etc. It is supposed to be normal records, just missing some fields by its nature, but the log system is aimed on helping the maintainer to keep track on such inconsistencies  in data and be able to recheck such records if any suspicions arise.
+
+6. non_recorded.log
+- is another maintainer's helper log that contains all the records that miss the core field - the vote data. "NON-RECORDED" is the UN Digital Library note that indicated that no votes were recorded. Our algorithm does not use this note because it is not correct as we have found out, but rather it checks the presence of the "vote" field on the page and if there is "N/A" value (that we set to the missing fields by default) the log is populated with this id.
+
+7. data_integrity.log
+- is the log that ensures us that we not have only happily sent the items to the database but the database has happily stored these data for us with no errors. Just another instrument to be sure that everything goes well and people can trust our job. The checksum verification have been done each time the crawler stopped.
