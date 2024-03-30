@@ -1,3 +1,5 @@
+Note: The full database dump will be added soon (after we get the official registration documents)... 
+
 # UN VOTES DATABASE
 
 Author and maintainer: Vadim Rudakov, vadim.rudakov@urfu.ru

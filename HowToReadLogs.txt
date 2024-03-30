@@ -1,5 +1,7 @@
 Logs are bound into a system that you can use to track the way that the resolutions' details made from the website to the database. If you want to see how the given resolution was collected, all you need is to search these logs using the resolution.id which is the same as the "record" number in the resolution's url.
 
+There are two directories with the logs: logs_builder (the logs of the program that built the database and populated it with all of the resolutions on the date it was started; will not be updated) and logs_update (the logs of the database updates; these files will be appended with the new data each time the database is updated with the new resolutions).
+
 1. scrapy.log
 - is the scrapy's crawler native log, where you can see the parsed urls and all the items it collected in the raw format.
 
