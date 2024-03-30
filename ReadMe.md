@@ -104,6 +104,8 @@ Consider example (see Fig. 5). The resolution with the id `518324` has eight (!)
 
 ```sql
 un_votes=> SELECT * FROM agenda WHERE id = 3537;
+```
+```
   id  |                 name                  | subject_id 
 ------+---------------------------------------+------------
  3537 | S/59 [60] FORMER YUGOSLAVIA SITUATION |        246
@@ -114,6 +116,8 @@ Then we update an intermediary table called `resolution_agenda` that have two co
 
 ```sql
 un_votes=> SELECT * FROM resolution_agenda WHERE resolution_id = 518324;
+```
+```
  resolution_id | agenda_id 
 ---------------+-----------
         518324 |      3536
