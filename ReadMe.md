@@ -591,3 +591,17 @@ For example, save the `subject` values into a special table:
     ORDER BY subject.name, year
 ) TO '~/UN_Analysis/subjects.csv' WITH CSV HEADER;
 ```
+
+# <b>Misc</b>
+
+## Indexes
+
+There are two B-Tree indexes created, one for year and another for month in `resolution` relation:
+
+```sql
+-- index for years
+CREATE INDEX year_b ON resolution(EXTRACT (YEAR FROM vote_date));
+
+-- index for months
+CREATE INDEX month_b ON resolution(EXTRACT (MONTH FROM vote_date));
+```
