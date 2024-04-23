@@ -1,0 +1,30 @@
+Sun Mar 31 01:47:07 AM +05 2024
+pg_checksums: error: cluster must be shut down
+Sun Mar 31 02:07:34 AM +05 2024
+Checksum operation completed
+Files scanned:   2369
+Blocks scanned:  344572
+Bad checksums:  0
+Data checksum version: 1
+--------------------------------
+Sun Mar 31 02:08:13 AM +05 2024
+Checksum operation completed
+Files scanned:   2369
+Blocks scanned:  344572
+Bad checksums:  0
+Data checksum version: 1
+--------------------------------
+Tue Apr 23 12:45:06 PM +05 2024
+Checksum operation completed
+Files scanned:   2974
+Blocks scanned:  346415
+Bad checksums:  0
+Data checksum version: 1
+--------------------------------
+Tue Apr 23 12:45:19 PM +05 2024
+Checksum operation completed
+Files scanned:   2974
+Blocks scanned:  346415
+Bad checksums:  0
+Data checksum version: 1
+--------------------------------
