@@ -538,3 +538,2286 @@ Getting 2021 year's' resolutions...
 Connection closed
 5:00:00
 2024-04-23 12:45:00+05:00---End updating process logging---
+5:00:00
+2024-06-04 15:33:53+05:00---Start updating process logging---
+Connection to database "un_votes" established
+SELECT id FROM resolution;
+Getting 2025 year's' resolutions...
+Getting 2024 year's' resolutions...
+Getting 2023 year's' resolutions...
+
+---------------------------------------------
+Item 4049576 processing started...
+
+ITEM values from 4049576 collecting...
+INFO: No value for "committee_report" found. Set default value: N/A
+Done
+
+**Transaction started**
+
+TITLE
+SELECT EXISTS (SELECT 1 FROM title WHERE name = $$Security Council resolution 2730 (2024) [on protection of humanitarian personnel and UN and associated personnel in armed conflict]$$);
+Row exists: False
+"title" relation population started...
+INSERT INTO "title" ("name") VALUES ('Security Council resolution 2730 (2024) [on protection of humanitarian personnel and UN and associated personnel in armed conflict]') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "title" relation is successful
+
+MEETING RECORD
+SELECT EXISTS (SELECT 1 FROM meeting_record WHERE symbol = $$S/PV.9634$$);
+Row exists: False
+"meeting_record" relation population started...
+INSERT INTO "meeting_record" ("symbol") VALUES ('S/PV.9634') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "meeting_record" relation is successful
+
+RESOLUTION
+SELECT EXISTS (SELECT 1 FROM resolution WHERE id = $$4049576$$ AND title_id = $$5762$$ AND symbol = $$S/RES/2730(2024)$$ AND meeting_record_id = $$4164$$ AND vote_date = $$2024-05-24$$);
+Row exists: False
+"resolution" relation population started...
+INSERT INTO "resolution" ("id", "title_id", "symbol", "meeting_record_id", "vote_date") VALUES ('4049576', '5762', 'S/RES/2730(2024)', '4164', '2024-05-24') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "resolution" relation is successful
+
+SUBJECT and AGENDA
+
+Agenda for ['4049576'] found
+Trying to get SUBJECT: Found
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$CIVILIAN PERSONS--ARMED CONFLICTS$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$CIVILIAN PERSONS--ARMED CONFLICTS$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'CIVILIAN PERSONS--ARMED CONFLICTS';
+id found: 356
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/79 [189] CIVILIAN PERSONS--ARMED CONFLICTS$$ AND subject_id = $$356$$);
+Row exists: False
+"agenda" relation population started...
+INSERT INTO "agenda" ("name", "subject_id") VALUES ('S/79 [189] CIVILIAN PERSONS--ARMED CONFLICTS', '356') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "agenda" relation is successful
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4049576$$ AND agenda_id = $$5732$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4049576', '5732') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+Agenda for ['4049576'] found
+Trying to get SUBJECT: INFO: No subject found. Subject value set to ['N/A']
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$N/A$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$N/A$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'N/A';
+id found: 1
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/ X Protection of civilians in armed conflict.$$ AND subject_id = $$1$$);
+Row exists: False
+"agenda" relation population started...
+INSERT INTO "agenda" ("name", "subject_id") VALUES ('S/ X Protection of civilians in armed conflict.', '1') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "agenda" relation is successful
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4049576$$ AND agenda_id = $$5733$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4049576', '5733') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+COMMITTEE REPORT and RESOLUTION COMMITTEE REPORT
+
+    COMMITTEE REPORT
+SELECT EXISTS (SELECT 1 FROM committee_report WHERE symbol = $$N/A$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM committee_report WHERE symbol = $$N/A$$);
+Row exists: True
+Getting id from "committee_report"...
+SELECT "id" FROM "committee_report" WHERE "symbol" = 'N/A';
+id found: 1
+
+    RESOLUTION COMMITTEE REPORT
+SELECT EXISTS (SELECT 1 FROM resolution_committee_report WHERE resolution_id = $$4049576$$ AND committee_report_id = $$1$$);
+Row exists: False
+"resolution_committee_report" relation population started...
+INSERT INTO "resolution_committee_report" ("resolution_id", "committee_report_id") VALUES ('4049576', '1') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_committee_report" relation is successful
+
+COUNTRY and VOTE
+Country and Vote relations population started...
+Country and Vote relations have been populated
+Total votes count: 15
+**Transaction ended**
+
+---------------------------------------------
+Item 4048673 processing started...
+
+ITEM values from 4048673 collecting...
+INFO: No value for "committee_report" found. Set default value: N/A
+Done
+
+**Transaction started**
+
+TITLE
+SELECT EXISTS (SELECT 1 FROM title WHERE name = $$International Day of Reflection and Commemoration of the 1995 Genocide in Srebrenica : resolution / adopted by the General Assembly$$);
+Row exists: False
+"title" relation population started...
+INSERT INTO "title" ("name") VALUES ('International Day of Reflection and Commemoration of the 1995 Genocide in Srebrenica : resolution / adopted by the General Assembly') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "title" relation is successful
+
+MEETING RECORD
+SELECT EXISTS (SELECT 1 FROM meeting_record WHERE symbol = $$A/78/PV.82$$);
+Row exists: False
+"meeting_record" relation population started...
+INSERT INTO "meeting_record" ("symbol") VALUES ('A/78/PV.82') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "meeting_record" relation is successful
+
+RESOLUTION
+SELECT EXISTS (SELECT 1 FROM resolution WHERE id = $$4048673$$ AND title_id = $$5763$$ AND symbol = $$A/RES/78/282$$ AND meeting_record_id = $$4165$$ AND vote_date = $$2024-05-23$$);
+Row exists: False
+"resolution" relation population started...
+INSERT INTO "resolution" ("id", "title_id", "symbol", "meeting_record_id", "vote_date") VALUES ('4048673', '5763', 'A/RES/78/282', '4165', '2024-05-23') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "resolution" relation is successful
+
+SUBJECT and AGENDA
+
+Agenda for ['4048673'] found
+Trying to get SUBJECT: Found
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$PEACE$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$PEACE$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'PEACE';
+id found: 574
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$A/78/251 14 Culture of peace. PEACE$$ AND subject_id = $$574$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$A/78/251 14 Culture of peace. PEACE$$ AND subject_id = $$574$$);
+Row exists: True
+Getting id from "agenda"...
+SELECT "id" FROM "agenda" WHERE "name" = 'A/78/251 14 Culture of peace. PEACE';
+id found: 5727
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4048673$$ AND agenda_id = $$5727$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4048673', '5727') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+COMMITTEE REPORT and RESOLUTION COMMITTEE REPORT
+
+    COMMITTEE REPORT
+SELECT EXISTS (SELECT 1 FROM committee_report WHERE symbol = $$N/A$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM committee_report WHERE symbol = $$N/A$$);
+Row exists: True
+Getting id from "committee_report"...
+SELECT "id" FROM "committee_report" WHERE "symbol" = 'N/A';
+id found: 1
+
+    RESOLUTION COMMITTEE REPORT
+SELECT EXISTS (SELECT 1 FROM resolution_committee_report WHERE resolution_id = $$4048673$$ AND committee_report_id = $$1$$);
+Row exists: False
+"resolution_committee_report" relation population started...
+INSERT INTO "resolution_committee_report" ("resolution_id", "committee_report_id") VALUES ('4048673', '1') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_committee_report" relation is successful
+
+COUNTRY and VOTE
+Country and Vote relations population started...
+Country and Vote relations have been populated
+Total votes count: 193
+**Transaction ended**
+
+---------------------------------------------
+Item 4046991 processing started...
+
+ITEM values from 4046991 collecting...
+INFO: No value for "committee_report" found. Set default value: N/A
+Done
+
+**Transaction started**
+
+TITLE
+SELECT EXISTS (SELECT 1 FROM title WHERE name = $$Admission of new Members to the United Nations : resolution / adopted by the General Assembly$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM title WHERE name = $$Admission of new Members to the United Nations : resolution / adopted by the General Assembly$$);
+Row exists: True
+Getting id from "title"...
+SELECT "id" FROM "title" WHERE "name" = 'Admission of new Members to the United Nations : resolution / adopted by the General Assembly';
+id found: 346
+
+MEETING RECORD
+SELECT EXISTS (SELECT 1 FROM meeting_record WHERE symbol = $$A/ES-10/PV.49$$);
+Row exists: False
+"meeting_record" relation population started...
+INSERT INTO "meeting_record" ("symbol") VALUES ('A/ES-10/PV.49') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "meeting_record" relation is successful
+
+RESOLUTION
+SELECT EXISTS (SELECT 1 FROM resolution WHERE id = $$4046991$$ AND title_id = $$346$$ AND symbol = $$A/RES/ES-10/23$$ AND meeting_record_id = $$4166$$ AND vote_date = $$2024-05-10$$);
+Row exists: False
+"resolution" relation population started...
+INSERT INTO "resolution" ("id", "title_id", "symbol", "meeting_record_id", "vote_date") VALUES ('4046991', '346', 'A/RES/ES-10/23', '4166', '2024-05-10') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "resolution" relation is successful
+
+SUBJECT and AGENDA
+
+Agenda for ['4046991'] found
+Trying to get SUBJECT: Found
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$TERRITORIES OCCUPIED BY ISRAEL--SETTLEMENT POLICY$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$TERRITORIES OCCUPIED BY ISRAEL--SETTLEMENT POLICY$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'TERRITORIES OCCUPIED BY ISRAEL--SETTLEMENT POLICY';
+id found: 320
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$A/ES-10/2 5 Illegal Israeli actions in occupied East Jerusalem and the rest of the Occupied Palestinian Territory. TERRITORIES OCCUPIED BY ISRAEL--SETTLEMENT POLICY$$ AND subject_id = $$320$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$A/ES-10/2 5 Illegal Israeli actions in occupied East Jerusalem and the rest of the Occupied Palestinian Territory. TERRITORIES OCCUPIED BY ISRAEL--SETTLEMENT POLICY$$ AND subject_id = $$320$$);
+Row exists: True
+Getting id from "agenda"...
+SELECT "id" FROM "agenda" WHERE "name" = 'A/ES-10/2 5 Illegal Israeli actions in occupied East Jerusalem and the rest of the Occupied Palestinian Territory. TERRITORIES OCCUPIED BY ISRAEL--SETTLEMENT POLICY';
+id found: 2818
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4046991$$ AND agenda_id = $$2818$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4046991', '2818') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+COMMITTEE REPORT and RESOLUTION COMMITTEE REPORT
+
+    COMMITTEE REPORT
+SELECT EXISTS (SELECT 1 FROM committee_report WHERE symbol = $$N/A$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM committee_report WHERE symbol = $$N/A$$);
+Row exists: True
+Getting id from "committee_report"...
+SELECT "id" FROM "committee_report" WHERE "symbol" = 'N/A';
+id found: 1
+
+    RESOLUTION COMMITTEE REPORT
+SELECT EXISTS (SELECT 1 FROM resolution_committee_report WHERE resolution_id = $$4046991$$ AND committee_report_id = $$1$$);
+Row exists: False
+"resolution_committee_report" relation population started...
+INSERT INTO "resolution_committee_report" ("resolution_id", "committee_report_id") VALUES ('4046991', '1') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_committee_report" relation is successful
+
+COUNTRY and VOTE
+Country and Vote relations population started...
+Country and Vote relations have been populated
+Total votes count: 193
+**Transaction ended**
+
+---------------------------------------------
+Item 4045704 processing started...
+
+ITEM values from 4045704 collecting...
+INFO: No value for "committee_report" found. Set default value: N/A
+Done
+
+**Transaction started**
+
+TITLE
+SELECT EXISTS (SELECT 1 FROM title WHERE name = $$Security Council resolution 2729 (2024) [on extension of the mandate of the UN Mission in South Sudan (UNMISS) until 30 Apr. 2025]$$);
+Row exists: False
+"title" relation population started...
+INSERT INTO "title" ("name") VALUES ('Security Council resolution 2729 (2024) [on extension of the mandate of the UN Mission in South Sudan (UNMISS) until 30 Apr. 2025]') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "title" relation is successful
+
+MEETING RECORD
+SELECT EXISTS (SELECT 1 FROM meeting_record WHERE symbol = $$S/PV.9620$$);
+Row exists: False
+"meeting_record" relation population started...
+INSERT INTO "meeting_record" ("symbol") VALUES ('S/PV.9620') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "meeting_record" relation is successful
+
+RESOLUTION
+SELECT EXISTS (SELECT 1 FROM resolution WHERE id = $$4045704$$ AND title_id = $$5764$$ AND symbol = $$S/RES/2729(2024)$$ AND meeting_record_id = $$4167$$ AND vote_date = $$2024-04-29$$);
+Row exists: False
+"resolution" relation population started...
+INSERT INTO "resolution" ("id", "title_id", "symbol", "meeting_record_id", "vote_date") VALUES ('4045704', '5764', 'S/RES/2729(2024)', '4167', '2024-04-29') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "resolution" relation is successful
+
+SUBJECT and AGENDA
+
+Agenda for ['4045704'] found
+Trying to get SUBJECT: Found
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$UN MISSION IN SOUTH SUDAN$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$UN MISSION IN SOUTH SUDAN$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'UN MISSION IN SOUTH SUDAN';
+id found: 528
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/79 [216] UN MISSION IN SOUTH SUDAN$$ AND subject_id = $$528$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/79 [216] UN MISSION IN SOUTH SUDAN$$ AND subject_id = $$528$$);
+Row exists: True
+Getting id from "agenda"...
+SELECT "id" FROM "agenda" WHERE "name" = 'S/79 [216] UN MISSION IN SOUTH SUDAN';
+id found: 5730
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4045704$$ AND agenda_id = $$5730$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4045704', '5730') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+Agenda for ['4045704'] found
+Trying to get SUBJECT: Found
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$SOUTH SUDAN--POLITICAL CONDITIONS$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$SOUTH SUDAN--POLITICAL CONDITIONS$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'SOUTH SUDAN--POLITICAL CONDITIONS';
+id found: 513
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/79 [223] SOUTH SUDAN--POLITICAL CONDITIONS$$ AND subject_id = $$513$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/79 [223] SOUTH SUDAN--POLITICAL CONDITIONS$$ AND subject_id = $$513$$);
+Row exists: True
+Getting id from "agenda"...
+SELECT "id" FROM "agenda" WHERE "name" = 'S/79 [223] SOUTH SUDAN--POLITICAL CONDITIONS';
+id found: 5731
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4045704$$ AND agenda_id = $$5731$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4045704', '5731') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+Agenda for ['4045704'] found
+Trying to get SUBJECT: INFO: No subject found. Subject value set to ['N/A']
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$N/A$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$N/A$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'N/A';
+id found: 1
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/ X Reports of the Secretary-General on the Sudan and South Sudan.$$ AND subject_id = $$1$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/ X Reports of the Secretary-General on the Sudan and South Sudan.$$ AND subject_id = $$1$$);
+Row exists: True
+Getting id from "agenda"...
+SELECT "id" FROM "agenda" WHERE "name" = 'S/ X Reports of the Secretary-General on the Sudan and South Sudan.';
+id found: 5582
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4045704$$ AND agenda_id = $$5582$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4045704', '5582') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+COMMITTEE REPORT and RESOLUTION COMMITTEE REPORT
+
+    COMMITTEE REPORT
+SELECT EXISTS (SELECT 1 FROM committee_report WHERE symbol = $$N/A$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM committee_report WHERE symbol = $$N/A$$);
+Row exists: True
+Getting id from "committee_report"...
+SELECT "id" FROM "committee_report" WHERE "symbol" = 'N/A';
+id found: 1
+
+    RESOLUTION COMMITTEE REPORT
+SELECT EXISTS (SELECT 1 FROM resolution_committee_report WHERE resolution_id = $$4045704$$ AND committee_report_id = $$1$$);
+Row exists: False
+"resolution_committee_report" relation population started...
+INSERT INTO "resolution_committee_report" ("resolution_id", "committee_report_id") VALUES ('4045704', '1') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_committee_report" relation is successful
+
+COUNTRY and VOTE
+Country and Vote relations population started...
+Country and Vote relations have been populated
+Total votes count: 15
+**Transaction ended**
+
+---------------------------------------------
+Item 4045077 processing started...
+
+ITEM values from 4045077 collecting...
+Done
+
+**Transaction started**
+
+TITLE
+SELECT EXISTS (SELECT 1 FROM title WHERE name = $$Revised estimates relating to the Independent Institution on Missing Persons in the Syrian Arab Republic : resolution / adopted by the General Assembly$$);
+Row exists: False
+"title" relation population started...
+INSERT INTO "title" ("name") VALUES ('Revised estimates relating to the Independent Institution on Missing Persons in the Syrian Arab Republic : resolution / adopted by the General Assembly') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "title" relation is successful
+
+MEETING RECORD
+SELECT EXISTS (SELECT 1 FROM meeting_record WHERE symbol = $$A/78/PV.73$$);
+Row exists: False
+"meeting_record" relation population started...
+INSERT INTO "meeting_record" ("symbol") VALUES ('A/78/PV.73') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "meeting_record" relation is successful
+
+RESOLUTION
+SELECT EXISTS (SELECT 1 FROM resolution WHERE id = $$4045077$$ AND title_id = $$5765$$ AND symbol = $$A/RES/78/273$$ AND meeting_record_id = $$4168$$ AND vote_date = $$2024-04-24$$);
+Row exists: False
+"resolution" relation population started...
+INSERT INTO "resolution" ("id", "title_id", "symbol", "meeting_record_id", "vote_date") VALUES ('4045077', '5765', 'A/RES/78/273', '4168', '2024-04-24') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "resolution" relation is successful
+
+SUBJECT and AGENDA
+
+Agenda for ['4045077'] found
+Trying to get SUBJECT: Found
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$UN--BUDGET (2024)$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$UN--BUDGET (2024)$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'UN--BUDGET (2024)';
+id found: 622
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$A/78/251 134 Proposed programme budget for 2024. UN--BUDGET (2024)$$ AND subject_id = $$622$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$A/78/251 134 Proposed programme budget for 2024. UN--BUDGET (2024)$$ AND subject_id = $$622$$);
+Row exists: True
+Getting id from "agenda"...
+SELECT "id" FROM "agenda" WHERE "name" = 'A/78/251 134 Proposed programme budget for 2024. UN--BUDGET (2024)';
+id found: 5462
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4045077$$ AND agenda_id = $$5462$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4045077', '5462') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+COMMITTEE REPORT and RESOLUTION COMMITTEE REPORT
+
+    COMMITTEE REPORT
+SELECT EXISTS (SELECT 1 FROM committee_report WHERE symbol = $$A/78/662/Add.1$$);
+Row exists: False
+"committee_report" relation population started...
+INSERT INTO "committee_report" ("symbol") VALUES ('A/78/662/Add.1') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "committee_report" relation is successful
+
+    RESOLUTION COMMITTEE REPORT
+SELECT EXISTS (SELECT 1 FROM resolution_committee_report WHERE resolution_id = $$4045077$$ AND committee_report_id = $$3108$$);
+Row exists: False
+"resolution_committee_report" relation population started...
+INSERT INTO "resolution_committee_report" ("resolution_id", "committee_report_id") VALUES ('4045077', '3108') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_committee_report" relation is successful
+
+COUNTRY and VOTE
+Country and Vote relations population started...
+Country and Vote relations have been populated
+Total votes count: 193
+**Transaction ended**
+Getting 2022 year's' resolutions...
+
+---------------------------------------------
+Item 4045078 processing started...
+
+ITEM values from 4045078 collecting...
+INFO: No value for "committee_report" found. Set default value: N/A
+Done
+
+**Transaction started**
+
+TITLE
+SELECT EXISTS (SELECT 1 FROM title WHERE name = $$Agreement under the United Nations Convention on the Law of the Sea on the Conservation and Sustainable Use of Marine Biological Diversity of Areas beyond National Jurisdiction : resolution / adopted by the General Assembly$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM title WHERE name = $$Agreement under the United Nations Convention on the Law of the Sea on the Conservation and Sustainable Use of Marine Biological Diversity of Areas beyond National Jurisdiction : resolution / adopted by the General Assembly$$);
+Row exists: True
+Getting id from "title"...
+SELECT "id" FROM "title" WHERE "name" = 'Agreement under the United Nations Convention on the Law of the Sea on the Conservation and Sustainable Use of Marine Biological Diversity of Areas beyond National Jurisdiction : resolution / adopted by the General Assembly';
+id found: 5659
+
+MEETING RECORD
+SELECT EXISTS (SELECT 1 FROM meeting_record WHERE symbol = $$A/78/PV.73$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM meeting_record WHERE symbol = $$A/78/PV.73$$);
+Row exists: True
+Getting id from "meeting_record"...
+SELECT "id" FROM "meeting_record" WHERE "symbol" = 'A/78/PV.73';
+id found: 4168
+
+RESOLUTION
+SELECT EXISTS (SELECT 1 FROM resolution WHERE id = $$4045078$$ AND title_id = $$5659$$ AND symbol = $$A/RES/78/272$$ AND meeting_record_id = $$4168$$ AND vote_date = $$2024-04-24$$);
+Row exists: False
+"resolution" relation population started...
+INSERT INTO "resolution" ("id", "title_id", "symbol", "meeting_record_id", "vote_date") VALUES ('4045078', '5659', 'A/RES/78/272', '4168', '2024-04-24') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "resolution" relation is successful
+
+SUBJECT and AGENDA
+
+Agenda for ['4045078'] found
+Trying to get SUBJECT: Found
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$MARINE ECOSYSTEMS--BIOLOGICAL DIVERSITY$$);
+Row exists: False
+"subject" relation population started...
+INSERT INTO "subject" ("name") VALUES ('MARINE ECOSYSTEMS--BIOLOGICAL DIVERSITY') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "subject" relation is successful
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$A/78/251 75c Agreement under the United Nations Convention on the Law of the Sea on the Conservation and Sustainable Use of Marine Biological Diversity of Areas beyond National Jurisdiction. MARINE ECOSYSTEMS--BIOLOGICAL DIVERSITY$$ AND subject_id = $$633$$);
+Row exists: False
+"agenda" relation population started...
+INSERT INTO "agenda" ("name", "subject_id") VALUES ('A/78/251 75c Agreement under the United Nations Convention on the Law of the Sea on the Conservation and Sustainable Use of Marine Biological Diversity of Areas beyond National Jurisdiction. MARINE ECOSYSTEMS--BIOLOGICAL DIVERSITY', '633') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "agenda" relation is successful
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4045078$$ AND agenda_id = $$5734$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4045078', '5734') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+COMMITTEE REPORT and RESOLUTION COMMITTEE REPORT
+
+    COMMITTEE REPORT
+SELECT EXISTS (SELECT 1 FROM committee_report WHERE symbol = $$N/A$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM committee_report WHERE symbol = $$N/A$$);
+Row exists: True
+Getting id from "committee_report"...
+SELECT "id" FROM "committee_report" WHERE "symbol" = 'N/A';
+id found: 1
+
+    RESOLUTION COMMITTEE REPORT
+SELECT EXISTS (SELECT 1 FROM resolution_committee_report WHERE resolution_id = $$4045078$$ AND committee_report_id = $$1$$);
+Row exists: False
+"resolution_committee_report" relation population started...
+INSERT INTO "resolution_committee_report" ("resolution_id", "committee_report_id") VALUES ('4045078', '1') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_committee_report" relation is successful
+
+COUNTRY and VOTE
+Country and Vote relations population started...
+Country and Vote relations have been populated
+Total votes count: 193
+**Transaction ended**
+Getting 2021 year's' resolutions...
+Connection closed
+5:00:00
+2024-06-04 15:34:42+05:00---End updating process logging---
+./start_crawler.sh: line 13: scrapy: command not found
+5:00:00
+2024-07-09 01:45:54+05:00---Start updating process logging---
+Connection to database "un_votes" established
+SELECT id FROM resolution;
+Getting 2025 year's' resolutions...
+Getting 2024 year's' resolutions...
+Getting 2023 year's' resolutions...
+
+---------------------------------------------
+Item 4053203 processing started...
+
+ITEM values from 4053203 collecting...
+Done
+
+**Transaction started**
+
+TITLE
+SELECT EXISTS (SELECT 1 FROM title WHERE name = $$Financing of the United Nations Interim Force in Lebanon : resolution / adopted by the General Assembly$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM title WHERE name = $$Financing of the United Nations Interim Force in Lebanon : resolution / adopted by the General Assembly$$);
+Row exists: True
+Getting id from "title"...
+SELECT "id" FROM "title" WHERE "name" = 'Financing of the United Nations Interim Force in Lebanon : resolution / adopted by the General Assembly';
+id found: 2133
+
+MEETING RECORD
+SELECT EXISTS (SELECT 1 FROM meeting_record WHERE symbol = $$A/78/PV.95$$);
+Row exists: False
+"meeting_record" relation population started...
+INSERT INTO "meeting_record" ("symbol") VALUES ('A/78/PV.95') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "meeting_record" relation is successful
+
+RESOLUTION
+SELECT EXISTS (SELECT 1 FROM resolution WHERE id = $$4053203$$ AND title_id = $$2133$$ AND symbol = $$A/RES/78/305$$ AND meeting_record_id = $$4169$$ AND vote_date = $$2024-06-28$$);
+Row exists: False
+"resolution" relation population started...
+INSERT INTO "resolution" ("id", "title_id", "symbol", "meeting_record_id", "vote_date") VALUES ('4053203', '2133', 'A/RES/78/305', '4169', '2024-06-28') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "resolution" relation is successful
+
+SUBJECT and AGENDA
+
+Agenda for ['4053203'] found
+Trying to get SUBJECT: Found
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$UN INTERIM FORCE IN LEBANON--FINANCING$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$UN INTERIM FORCE IN LEBANON--FINANCING$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'UN INTERIM FORCE IN LEBANON--FINANCING';
+id found: 69
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$A/78/251 156b United Nations Interim Force in Lebanon. UN INTERIM FORCE IN LEBANON--FINANCING$$ AND subject_id = $$69$$);
+Row exists: False
+"agenda" relation population started...
+INSERT INTO "agenda" ("name", "subject_id") VALUES ('A/78/251 156b United Nations Interim Force in Lebanon. UN INTERIM FORCE IN LEBANON--FINANCING', '69') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "agenda" relation is successful
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4053203$$ AND agenda_id = $$5735$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4053203', '5735') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+COMMITTEE REPORT and RESOLUTION COMMITTEE REPORT
+
+    COMMITTEE REPORT
+SELECT EXISTS (SELECT 1 FROM committee_report WHERE symbol = $$A/78/929$$);
+Row exists: False
+"committee_report" relation population started...
+INSERT INTO "committee_report" ("symbol") VALUES ('A/78/929') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "committee_report" relation is successful
+
+    RESOLUTION COMMITTEE REPORT
+SELECT EXISTS (SELECT 1 FROM resolution_committee_report WHERE resolution_id = $$4053203$$ AND committee_report_id = $$3109$$);
+Row exists: False
+"resolution_committee_report" relation population started...
+INSERT INTO "resolution_committee_report" ("resolution_id", "committee_report_id") VALUES ('4053203', '3109') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_committee_report" relation is successful
+
+COUNTRY and VOTE
+Country and Vote relations population started...
+Country and Vote relations have been populated
+Total votes count: 193
+**Transaction ended**
+
+---------------------------------------------
+Item 4053466 processing started...
+
+ITEM values from 4053466 collecting...
+INFO: No value for "committee_report" found. Set default value: N/A
+Done
+
+**Transaction started**
+
+TITLE
+SELECT EXISTS (SELECT 1 FROM title WHERE name = $$Security Council resolution 2738 (2024) [on extension of the authorizations of the African Union Transition Mission in Somalia (ATMIS) until 12 Aug. 2024]$$);
+Row exists: False
+"title" relation population started...
+INSERT INTO "title" ("name") VALUES ('Security Council resolution 2738 (2024) [on extension of the authorizations of the African Union Transition Mission in Somalia (ATMIS) until 12 Aug. 2024]') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "title" relation is successful
+
+MEETING RECORD
+SELECT EXISTS (SELECT 1 FROM meeting_record WHERE symbol = $$S/PV.9677$$);
+Row exists: False
+"meeting_record" relation population started...
+INSERT INTO "meeting_record" ("symbol") VALUES ('S/PV.9677') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "meeting_record" relation is successful
+
+RESOLUTION
+SELECT EXISTS (SELECT 1 FROM resolution WHERE id = $$4053466$$ AND title_id = $$5766$$ AND symbol = $$S/RES/2741(2024)$$ AND meeting_record_id = $$4170$$ AND vote_date = $$2024-06-28$$);
+Row exists: False
+"resolution" relation population started...
+INSERT INTO "resolution" ("id", "title_id", "symbol", "meeting_record_id", "vote_date") VALUES ('4053466', '5766', 'S/RES/2741(2024)', '4170', '2024-06-28') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "resolution" relation is successful
+
+SUBJECT and AGENDA
+
+Agenda for ['4053466'] found
+Trying to get SUBJECT: Found
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$SOMALIA SITUATION$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$SOMALIA SITUATION$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'SOMALIA SITUATION';
+id found: 250
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/79 [84] SOMALIA SITUATION$$ AND subject_id = $$250$$);
+Row exists: False
+"agenda" relation population started...
+INSERT INTO "agenda" ("name", "subject_id") VALUES ('S/79 [84] SOMALIA SITUATION', '250') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "agenda" relation is successful
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4053466$$ AND agenda_id = $$5736$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4053466', '5736') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+Agenda for ['4053466'] found
+Trying to get SUBJECT: INFO: No subject found. Subject value set to ['N/A']
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$N/A$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$N/A$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'N/A';
+id found: 1
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/ X The situation in Somalia.$$ AND subject_id = $$1$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/ X The situation in Somalia.$$ AND subject_id = $$1$$);
+Row exists: True
+Getting id from "agenda"...
+SELECT "id" FROM "agenda" WHERE "name" = 'S/ X The situation in Somalia.';
+id found: 5584
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4053466$$ AND agenda_id = $$5584$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4053466', '5584') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+COMMITTEE REPORT and RESOLUTION COMMITTEE REPORT
+
+    COMMITTEE REPORT
+SELECT EXISTS (SELECT 1 FROM committee_report WHERE symbol = $$N/A$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM committee_report WHERE symbol = $$N/A$$);
+Row exists: True
+Getting id from "committee_report"...
+SELECT "id" FROM "committee_report" WHERE "symbol" = 'N/A';
+id found: 1
+
+    RESOLUTION COMMITTEE REPORT
+SELECT EXISTS (SELECT 1 FROM resolution_committee_report WHERE resolution_id = $$4053466$$ AND committee_report_id = $$1$$);
+Row exists: False
+"resolution_committee_report" relation population started...
+INSERT INTO "resolution_committee_report" ("resolution_id", "committee_report_id") VALUES ('4053466', '1') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_committee_report" relation is successful
+
+COUNTRY and VOTE
+Country and Vote relations population started...
+Country and Vote relations have been populated
+Total votes count: 15
+**Transaction ended**
+
+---------------------------------------------
+Item 4053362 processing started...
+
+ITEM values from 4053362 collecting...
+INFO: No value for "committee_report" found. Set default value: N/A
+Done
+
+**Transaction started**
+
+TITLE
+SELECT EXISTS (SELECT 1 FROM title WHERE name = $$Security Council resolution 2737 (2024) [on extension of the mandate of the UN Disengagement Observer Force (UNDOF) until 31 Dec. 2024]$$);
+Row exists: False
+"title" relation population started...
+INSERT INTO "title" ("name") VALUES ('Security Council resolution 2737 (2024) [on extension of the mandate of the UN Disengagement Observer Force (UNDOF) until 31 Dec. 2024]') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "title" relation is successful
+
+MEETING RECORD
+SELECT EXISTS (SELECT 1 FROM meeting_record WHERE symbol = $$S/PV.9670$$);
+Row exists: False
+"meeting_record" relation population started...
+INSERT INTO "meeting_record" ("symbol") VALUES ('S/PV.9670') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "meeting_record" relation is successful
+
+RESOLUTION
+SELECT EXISTS (SELECT 1 FROM resolution WHERE id = $$4053362$$ AND title_id = $$5767$$ AND symbol = $$S/RES/2737(2024)$$ AND meeting_record_id = $$4171$$ AND vote_date = $$2024-06-27$$);
+Row exists: False
+"resolution" relation population started...
+INSERT INTO "resolution" ("id", "title_id", "symbol", "meeting_record_id", "vote_date") VALUES ('4053362', '5767', 'S/RES/2737(2024)', '4171', '2024-06-27') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "resolution" relation is successful
+
+SUBJECT and AGENDA
+
+Agenda for ['4053362'] found
+Trying to get SUBJECT: Found
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$UN DISENGAGEMENT OBSERVER FORCE$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$UN DISENGAGEMENT OBSERVER FORCE$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'UN DISENGAGEMENT OBSERVER FORCE';
+id found: 122
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/79 [55] UN DISENGAGEMENT OBSERVER FORCE$$ AND subject_id = $$122$$);
+Row exists: False
+"agenda" relation population started...
+INSERT INTO "agenda" ("name", "subject_id") VALUES ('S/79 [55] UN DISENGAGEMENT OBSERVER FORCE', '122') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "agenda" relation is successful
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4053362$$ AND agenda_id = $$5737$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4053362', '5737') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+Agenda for ['4053362'] found
+Trying to get SUBJECT: Found
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$MIDDLE EAST SITUATION$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$MIDDLE EAST SITUATION$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'MIDDLE EAST SITUATION';
+id found: 3
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/79 [54] MIDDLE EAST SITUATION$$ AND subject_id = $$3$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/79 [54] MIDDLE EAST SITUATION$$ AND subject_id = $$3$$);
+Row exists: True
+Getting id from "agenda"...
+SELECT "id" FROM "agenda" WHERE "name" = 'S/79 [54] MIDDLE EAST SITUATION';
+id found: 5725
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4053362$$ AND agenda_id = $$5725$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4053362', '5725') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+Agenda for ['4053362'] found
+Trying to get SUBJECT: INFO: No subject found. Subject value set to ['N/A']
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$N/A$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$N/A$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'N/A';
+id found: 1
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/ X The situation in the Middle East.$$ AND subject_id = $$1$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/ X The situation in the Middle East.$$ AND subject_id = $$1$$);
+Row exists: True
+Getting id from "agenda"...
+SELECT "id" FROM "agenda" WHERE "name" = 'S/ X The situation in the Middle East.';
+id found: 5456
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4053362$$ AND agenda_id = $$5456$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4053362', '5456') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+COMMITTEE REPORT and RESOLUTION COMMITTEE REPORT
+
+    COMMITTEE REPORT
+SELECT EXISTS (SELECT 1 FROM committee_report WHERE symbol = $$N/A$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM committee_report WHERE symbol = $$N/A$$);
+Row exists: True
+Getting id from "committee_report"...
+SELECT "id" FROM "committee_report" WHERE "symbol" = 'N/A';
+id found: 1
+
+    RESOLUTION COMMITTEE REPORT
+SELECT EXISTS (SELECT 1 FROM resolution_committee_report WHERE resolution_id = $$4053362$$ AND committee_report_id = $$1$$);
+Row exists: False
+"resolution_committee_report" relation population started...
+INSERT INTO "resolution_committee_report" ("resolution_id", "committee_report_id") VALUES ('4053362', '1') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_committee_report" relation is successful
+
+COUNTRY and VOTE
+Country and Vote relations population started...
+Country and Vote relations have been populated
+Total votes count: 15
+**Transaction ended**
+
+---------------------------------------------
+Item 4053363 processing started...
+
+ITEM values from 4053363 collecting...
+INFO: No value for "committee_report" found. Set default value: N/A
+Done
+
+**Transaction started**
+
+TITLE
+SELECT EXISTS (SELECT 1 FROM title WHERE name = $$Security Council resolution 2738 (2024) [on renewal of measures on arms embargo against the Democratic Republic of the Congo imposed by Security Council resolution 2293 (2016) until 1 July 2025 and extension of the mandate of the Group of Experts Established pursuant to Resolution 1533 (2004) until 1 Aug. 2025]$$);
+Row exists: False
+"title" relation population started...
+INSERT INTO "title" ("name") VALUES ('Security Council resolution 2738 (2024) [on renewal of measures on arms embargo against the Democratic Republic of the Congo imposed by Security Council resolution 2293 (2016) until 1 July 2025 and extension of the mandate of the Group of Experts Established pursuant to Resolution 1533 (2004) until 1 Aug. 2025]') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "title" relation is successful
+
+MEETING RECORD
+SELECT EXISTS (SELECT 1 FROM meeting_record WHERE symbol = $$S/PV.9671$$);
+Row exists: False
+"meeting_record" relation population started...
+INSERT INTO "meeting_record" ("symbol") VALUES ('S/PV.9671') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "meeting_record" relation is successful
+
+RESOLUTION
+SELECT EXISTS (SELECT 1 FROM resolution WHERE id = $$4053363$$ AND title_id = $$5768$$ AND symbol = $$S/RES/2738(2024)$$ AND meeting_record_id = $$4172$$ AND vote_date = $$2024-06-27$$);
+Row exists: False
+"resolution" relation population started...
+INSERT INTO "resolution" ("id", "title_id", "symbol", "meeting_record_id", "vote_date") VALUES ('4053363', '5768', 'S/RES/2738(2024)', '4172', '2024-06-27') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "resolution" relation is successful
+
+SUBJECT and AGENDA
+
+Agenda for ['4053363'] found
+Trying to get SUBJECT: Found
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$DEMOCRATIC REPUBLIC OF THE CONGO SITUATION$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$DEMOCRATIC REPUBLIC OF THE CONGO SITUATION$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'DEMOCRATIC REPUBLIC OF THE CONGO SITUATION';
+id found: 330
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/79 [102] DEMOCRATIC REPUBLIC OF THE CONGO SITUATION$$ AND subject_id = $$330$$);
+Row exists: False
+"agenda" relation population started...
+INSERT INTO "agenda" ("name", "subject_id") VALUES ('S/79 [102] DEMOCRATIC REPUBLIC OF THE CONGO SITUATION', '330') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "agenda" relation is successful
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4053363$$ AND agenda_id = $$5738$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4053363', '5738') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+Agenda for ['4053363'] found
+Trying to get SUBJECT: INFO: No subject found. Subject value set to ['N/A']
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$N/A$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$N/A$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'N/A';
+id found: 1
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/ X The situation concerning the Democratic Republic of the Congo.$$ AND subject_id = $$1$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/ X The situation concerning the Democratic Republic of the Congo.$$ AND subject_id = $$1$$);
+Row exists: True
+Getting id from "agenda"...
+SELECT "id" FROM "agenda" WHERE "name" = 'S/ X The situation concerning the Democratic Republic of the Congo.';
+id found: 5495
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4053363$$ AND agenda_id = $$5495$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4053363', '5495') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+COMMITTEE REPORT and RESOLUTION COMMITTEE REPORT
+
+    COMMITTEE REPORT
+SELECT EXISTS (SELECT 1 FROM committee_report WHERE symbol = $$N/A$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM committee_report WHERE symbol = $$N/A$$);
+Row exists: True
+Getting id from "committee_report"...
+SELECT "id" FROM "committee_report" WHERE "symbol" = 'N/A';
+id found: 1
+
+    RESOLUTION COMMITTEE REPORT
+SELECT EXISTS (SELECT 1 FROM resolution_committee_report WHERE resolution_id = $$4053363$$ AND committee_report_id = $$1$$);
+Row exists: False
+"resolution_committee_report" relation population started...
+INSERT INTO "resolution_committee_report" ("resolution_id", "committee_report_id") VALUES ('4053363', '1') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_committee_report" relation is successful
+
+COUNTRY and VOTE
+Country and Vote relations population started...
+Country and Vote relations have been populated
+Total votes count: 15
+**Transaction ended**
+
+---------------------------------------------
+Item 4053364 processing started...
+
+ITEM values from 4053364 collecting...
+INFO: No value for "committee_report" found. Set default value: N/A
+Done
+
+**Transaction started**
+
+TITLE
+SELECT EXISTS (SELECT 1 FROM title WHERE name = $$Security Council resolution 2739 (2024) [on extension of the reporting request in para. 10 of resolution 2722 (2024) on Houthi attacks on merchant and commercial vessels in the Red Sea until 15 Jan. 2025]$$);
+Row exists: False
+"title" relation population started...
+INSERT INTO "title" ("name") VALUES ('Security Council resolution 2739 (2024) [on extension of the reporting request in para. 10 of resolution 2722 (2024) on Houthi attacks on merchant and commercial vessels in the Red Sea until 15 Jan. 2025]') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "title" relation is successful
+
+MEETING RECORD
+SELECT EXISTS (SELECT 1 FROM meeting_record WHERE symbol = $$S/PV.9672$$);
+Row exists: False
+"meeting_record" relation population started...
+INSERT INTO "meeting_record" ("symbol") VALUES ('S/PV.9672') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "meeting_record" relation is successful
+
+RESOLUTION
+SELECT EXISTS (SELECT 1 FROM resolution WHERE id = $$4053364$$ AND title_id = $$5769$$ AND symbol = $$S/RES/2739(2024)$$ AND meeting_record_id = $$4173$$ AND vote_date = $$2024-06-27$$);
+Row exists: False
+"resolution" relation population started...
+INSERT INTO "resolution" ("id", "title_id", "symbol", "meeting_record_id", "vote_date") VALUES ('4053364', '5769', 'S/RES/2739(2024)', '4173', '2024-06-27') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "resolution" relation is successful
+
+SUBJECT and AGENDA
+
+Agenda for ['4053364'] found
+Trying to get SUBJECT: Found
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$YEMEN--POLITICAL CONDITIONS$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$YEMEN--POLITICAL CONDITIONS$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'YEMEN--POLITICAL CONDITIONS';
+id found: 525
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/79 [58] YEMEN--POLITICAL CONDITIONS$$ AND subject_id = $$525$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/79 [58] YEMEN--POLITICAL CONDITIONS$$ AND subject_id = $$525$$);
+Row exists: True
+Getting id from "agenda"...
+SELECT "id" FROM "agenda" WHERE "name" = 'S/79 [58] YEMEN--POLITICAL CONDITIONS';
+id found: 5715
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4053364$$ AND agenda_id = $$5715$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4053364', '5715') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+Agenda for ['4053364'] found
+Trying to get SUBJECT: INFO: No subject found. Subject value set to ['N/A']
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$N/A$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$N/A$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'N/A';
+id found: 1
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/ X Maintenance of international peace and security.$$ AND subject_id = $$1$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/ X Maintenance of international peace and security.$$ AND subject_id = $$1$$);
+Row exists: True
+Getting id from "agenda"...
+SELECT "id" FROM "agenda" WHERE "name" = 'S/ X Maintenance of international peace and security.';
+id found: 5607
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4053364$$ AND agenda_id = $$5607$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4053364', '5607') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+COMMITTEE REPORT and RESOLUTION COMMITTEE REPORT
+
+    COMMITTEE REPORT
+SELECT EXISTS (SELECT 1 FROM committee_report WHERE symbol = $$N/A$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM committee_report WHERE symbol = $$N/A$$);
+Row exists: True
+Getting id from "committee_report"...
+SELECT "id" FROM "committee_report" WHERE "symbol" = 'N/A';
+id found: 1
+
+    RESOLUTION COMMITTEE REPORT
+SELECT EXISTS (SELECT 1 FROM resolution_committee_report WHERE resolution_id = $$4053364$$ AND committee_report_id = $$1$$);
+Row exists: False
+"resolution_committee_report" relation population started...
+INSERT INTO "resolution_committee_report" ("resolution_id", "committee_report_id") VALUES ('4053364', '1') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_committee_report" relation is successful
+
+COUNTRY and VOTE
+Country and Vote relations population started...
+Country and Vote relations have been populated
+Total votes count: 15
+**Transaction ended**
+
+---------------------------------------------
+Item 4053365 processing started...
+
+ITEM values from 4053365 collecting...
+INFO: No value for "committee_report" found. Set default value: N/A
+Done
+
+**Transaction started**
+
+TITLE
+SELECT EXISTS (SELECT 1 FROM title WHERE name = $$Security Council resolution 2740 (2024) [on appointment of the Prosecutor of the International Residual Mechanism for Criminal Tribunals with effect from 1 July 2024 until 30 June 2026]$$);
+Row exists: False
+"title" relation population started...
+INSERT INTO "title" ("name") VALUES ('Security Council resolution 2740 (2024) [on appointment of the Prosecutor of the International Residual Mechanism for Criminal Tribunals with effect from 1 July 2024 until 30 June 2026]') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "title" relation is successful
+
+MEETING RECORD
+SELECT EXISTS (SELECT 1 FROM meeting_record WHERE symbol = $$S/PV.9674$$);
+Row exists: False
+"meeting_record" relation population started...
+INSERT INTO "meeting_record" ("symbol") VALUES ('S/PV.9674') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "meeting_record" relation is successful
+
+RESOLUTION
+SELECT EXISTS (SELECT 1 FROM resolution WHERE id = $$4053365$$ AND title_id = $$5770$$ AND symbol = $$S/RES/2740(2024)$$ AND meeting_record_id = $$4174$$ AND vote_date = $$2024-06-27$$);
+Row exists: False
+"resolution" relation population started...
+INSERT INTO "resolution" ("id", "title_id", "symbol", "meeting_record_id", "vote_date") VALUES ('4053365', '5770', 'S/RES/2740(2024)', '4174', '2024-06-27') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "resolution" relation is successful
+
+SUBJECT and AGENDA
+
+Agenda for ['4053365'] found
+Trying to get SUBJECT: Found
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$INTERNATIONAL RESIDUAL MECHANISM FOR CRIMINAL TRIBUNALS$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$INTERNATIONAL RESIDUAL MECHANISM FOR CRIMINAL TRIBUNALS$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'INTERNATIONAL RESIDUAL MECHANISM FOR CRIMINAL TRIBUNALS';
+id found: 587
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/79 [98] INTERNATIONAL RESIDUAL MECHANISM FOR CRIMINAL TRIBUNALS$$ AND subject_id = $$587$$);
+Row exists: False
+"agenda" relation population started...
+INSERT INTO "agenda" ("name", "subject_id") VALUES ('S/79 [98] INTERNATIONAL RESIDUAL MECHANISM FOR CRIMINAL TRIBUNALS', '587') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "agenda" relation is successful
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4053365$$ AND agenda_id = $$5739$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4053365', '5739') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+Agenda for ['4053365'] found
+Trying to get SUBJECT: Found
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$INTERNATIONAL TRIBUNAL--FORMER YUGOSLAVIA$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$INTERNATIONAL TRIBUNAL--FORMER YUGOSLAVIA$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'INTERNATIONAL TRIBUNAL--FORMER YUGOSLAVIA';
+id found: 325
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/79 [76] INTERNATIONAL TRIBUNAL--FORMER YUGOSLAVIA$$ AND subject_id = $$325$$);
+Row exists: False
+"agenda" relation population started...
+INSERT INTO "agenda" ("name", "subject_id") VALUES ('S/79 [76] INTERNATIONAL TRIBUNAL--FORMER YUGOSLAVIA', '325') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "agenda" relation is successful
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4053365$$ AND agenda_id = $$5740$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4053365', '5740') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+Agenda for ['4053365'] found
+Trying to get SUBJECT: Found
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$INTERNATIONAL TRIBUNAL--RWANDA$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$INTERNATIONAL TRIBUNAL--RWANDA$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'INTERNATIONAL TRIBUNAL--RWANDA';
+id found: 341
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/79 [97] INTERNATIONAL TRIBUNAL--RWANDA$$ AND subject_id = $$341$$);
+Row exists: False
+"agenda" relation population started...
+INSERT INTO "agenda" ("name", "subject_id") VALUES ('S/79 [97] INTERNATIONAL TRIBUNAL--RWANDA', '341') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "agenda" relation is successful
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4053365$$ AND agenda_id = $$5741$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4053365', '5741') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+Agenda for ['4053365'] found
+Trying to get SUBJECT: Found
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$RWANDA SITUATION$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$RWANDA SITUATION$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'RWANDA SITUATION';
+id found: 240
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/79 [95] RWANDA SITUATION$$ AND subject_id = $$240$$);
+Row exists: False
+"agenda" relation population started...
+INSERT INTO "agenda" ("name", "subject_id") VALUES ('S/79 [95] RWANDA SITUATION', '240') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "agenda" relation is successful
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4053365$$ AND agenda_id = $$5742$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4053365', '5742') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+Agenda for ['4053365'] found
+Trying to get SUBJECT: Found
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$FORMER YUGOSLAVIA SITUATION$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$FORMER YUGOSLAVIA SITUATION$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'FORMER YUGOSLAVIA SITUATION';
+id found: 246
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/79 [60] FORMER YUGOSLAVIA SITUATION$$ AND subject_id = $$246$$);
+Row exists: False
+"agenda" relation population started...
+INSERT INTO "agenda" ("name", "subject_id") VALUES ('S/79 [60] FORMER YUGOSLAVIA SITUATION', '246') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "agenda" relation is successful
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4053365$$ AND agenda_id = $$5743$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4053365', '5743') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+Agenda for ['4053365'] found
+Trying to get SUBJECT: INFO: No subject found. Subject value set to ['N/A']
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$N/A$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$N/A$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'N/A';
+id found: 1
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/ X International Residual Mechanism for Criminal Tribunals.$$ AND subject_id = $$1$$);
+Row exists: False
+"agenda" relation population started...
+INSERT INTO "agenda" ("name", "subject_id") VALUES ('S/ X International Residual Mechanism for Criminal Tribunals.', '1') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "agenda" relation is successful
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4053365$$ AND agenda_id = $$5744$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4053365', '5744') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+COMMITTEE REPORT and RESOLUTION COMMITTEE REPORT
+
+    COMMITTEE REPORT
+SELECT EXISTS (SELECT 1 FROM committee_report WHERE symbol = $$N/A$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM committee_report WHERE symbol = $$N/A$$);
+Row exists: True
+Getting id from "committee_report"...
+SELECT "id" FROM "committee_report" WHERE "symbol" = 'N/A';
+id found: 1
+
+    RESOLUTION COMMITTEE REPORT
+SELECT EXISTS (SELECT 1 FROM resolution_committee_report WHERE resolution_id = $$4053365$$ AND committee_report_id = $$1$$);
+Row exists: False
+"resolution_committee_report" relation population started...
+INSERT INTO "resolution_committee_report" ("resolution_id", "committee_report_id") VALUES ('4053365', '1') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_committee_report" relation is successful
+
+COUNTRY and VOTE
+Country and Vote relations population started...
+Country and Vote relations have been populated
+Total votes count: 15
+**Transaction ended**
+
+---------------------------------------------
+Item 4052415 processing started...
+
+ITEM values from 4052415 collecting...
+INFO: No value for "committee_report" found. Set default value: N/A
+Done
+
+**Transaction started**
+
+TITLE
+SELECT EXISTS (SELECT 1 FROM title WHERE name = $$Security Council resolution 2736 (2024) [on halt to fighting and de-escalation in and around El Fasher, Sudan]$$);
+Row exists: False
+"title" relation population started...
+INSERT INTO "title" ("name") VALUES ('Security Council resolution 2736 (2024) [on halt to fighting and de-escalation in and around El Fasher, Sudan]') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "title" relation is successful
+
+MEETING RECORD
+SELECT EXISTS (SELECT 1 FROM meeting_record WHERE symbol = $$S/PV.9655$$);
+Row exists: False
+"meeting_record" relation population started...
+INSERT INTO "meeting_record" ("symbol") VALUES ('S/PV.9655') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "meeting_record" relation is successful
+
+RESOLUTION
+SELECT EXISTS (SELECT 1 FROM resolution WHERE id = $$4052415$$ AND title_id = $$5771$$ AND symbol = $$S/RES/2736(2024)$$ AND meeting_record_id = $$4175$$ AND vote_date = $$2024-06-13$$);
+Row exists: False
+"resolution" relation population started...
+INSERT INTO "resolution" ("id", "title_id", "symbol", "meeting_record_id", "vote_date") VALUES ('4052415', '5771', 'S/RES/2736(2024)', '4175', '2024-06-13') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "resolution" relation is successful
+
+SUBJECT and AGENDA
+
+Agenda for ['4052415'] found
+Trying to get SUBJECT: Found
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$SUDAN--POLITICAL CONDITIONS$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$SUDAN--POLITICAL CONDITIONS$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'SUDAN--POLITICAL CONDITIONS';
+id found: 430
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/79 [160] SUDAN--POLITICAL CONDITIONS$$ AND subject_id = $$430$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/79 [160] SUDAN--POLITICAL CONDITIONS$$ AND subject_id = $$430$$);
+Row exists: True
+Getting id from "agenda"...
+SELECT "id" FROM "agenda" WHERE "name" = 'S/79 [160] SUDAN--POLITICAL CONDITIONS';
+id found: 5712
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4052415$$ AND agenda_id = $$5712$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4052415', '5712') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+Agenda for ['4052415'] found
+Trying to get SUBJECT: INFO: No subject found. Subject value set to ['N/A']
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$N/A$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$N/A$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'N/A';
+id found: 1
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/ X Reports of the Secretary-General on the Sudan and South Sudan.$$ AND subject_id = $$1$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/ X Reports of the Secretary-General on the Sudan and South Sudan.$$ AND subject_id = $$1$$);
+Row exists: True
+Getting id from "agenda"...
+SELECT "id" FROM "agenda" WHERE "name" = 'S/ X Reports of the Secretary-General on the Sudan and South Sudan.';
+id found: 5582
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4052415$$ AND agenda_id = $$5582$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4052415', '5582') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+COMMITTEE REPORT and RESOLUTION COMMITTEE REPORT
+
+    COMMITTEE REPORT
+SELECT EXISTS (SELECT 1 FROM committee_report WHERE symbol = $$N/A$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM committee_report WHERE symbol = $$N/A$$);
+Row exists: True
+Getting id from "committee_report"...
+SELECT "id" FROM "committee_report" WHERE "symbol" = 'N/A';
+id found: 1
+
+    RESOLUTION COMMITTEE REPORT
+SELECT EXISTS (SELECT 1 FROM resolution_committee_report WHERE resolution_id = $$4052415$$ AND committee_report_id = $$1$$);
+Row exists: False
+"resolution_committee_report" relation population started...
+INSERT INTO "resolution_committee_report" ("resolution_id", "committee_report_id") VALUES ('4052415', '1') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_committee_report" relation is successful
+
+COUNTRY and VOTE
+Country and Vote relations population started...
+Country and Vote relations have been populated
+Total votes count: 15
+**Transaction ended**
+
+---------------------------------------------
+Item 4051242 processing started...
+
+ITEM values from 4051242 collecting...
+INFO: No value for "committee_report" found. Set default value: N/A
+Done
+
+**Transaction started**
+
+TITLE
+SELECT EXISTS (SELECT 1 FROM title WHERE name = $$Security Council resolution 2735 (2024) [on ceasefire in the Gaza Strip]$$);
+Row exists: False
+"title" relation population started...
+INSERT INTO "title" ("name") VALUES ('Security Council resolution 2735 (2024) [on ceasefire in the Gaza Strip]') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "title" relation is successful
+
+MEETING RECORD
+SELECT EXISTS (SELECT 1 FROM meeting_record WHERE symbol = $$S/PV.9650$$);
+Row exists: False
+"meeting_record" relation population started...
+INSERT INTO "meeting_record" ("symbol") VALUES ('S/PV.9650') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "meeting_record" relation is successful
+
+RESOLUTION
+SELECT EXISTS (SELECT 1 FROM resolution WHERE id = $$4051242$$ AND title_id = $$5772$$ AND symbol = $$S/RES/2735(2024)$$ AND meeting_record_id = $$4176$$ AND vote_date = $$2024-06-10$$);
+Row exists: False
+"resolution" relation population started...
+INSERT INTO "resolution" ("id", "title_id", "symbol", "meeting_record_id", "vote_date") VALUES ('4051242', '5772', 'S/RES/2735(2024)', '4176', '2024-06-10') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "resolution" relation is successful
+
+SUBJECT and AGENDA
+
+Agenda for ['4051242'] found
+Trying to get SUBJECT: Found
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$TERRITORIES OCCUPIED BY ISRAEL$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$TERRITORIES OCCUPIED BY ISRAEL$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'TERRITORIES OCCUPIED BY ISRAEL';
+id found: 124
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/79 [53] TERRITORIES OCCUPIED BY ISRAEL$$ AND subject_id = $$124$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/79 [53] TERRITORIES OCCUPIED BY ISRAEL$$ AND subject_id = $$124$$);
+Row exists: True
+Getting id from "agenda"...
+SELECT "id" FROM "agenda" WHERE "name" = 'S/79 [53] TERRITORIES OCCUPIED BY ISRAEL';
+id found: 5724
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4051242$$ AND agenda_id = $$5724$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4051242', '5724') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+Agenda for ['4051242'] found
+Trying to get SUBJECT: Found
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$MIDDLE EAST SITUATION$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$MIDDLE EAST SITUATION$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'MIDDLE EAST SITUATION';
+id found: 3
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/79 [54] MIDDLE EAST SITUATION$$ AND subject_id = $$3$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/79 [54] MIDDLE EAST SITUATION$$ AND subject_id = $$3$$);
+Row exists: True
+Getting id from "agenda"...
+SELECT "id" FROM "agenda" WHERE "name" = 'S/79 [54] MIDDLE EAST SITUATION';
+id found: 5725
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4051242$$ AND agenda_id = $$5725$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4051242', '5725') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+Agenda for ['4051242'] found
+Trying to get SUBJECT: Found
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$PALESTINE QUESTION$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$PALESTINE QUESTION$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'PALESTINE QUESTION';
+id found: 49
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/79 [50] PALESTINE QUESTION$$ AND subject_id = $$49$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/79 [50] PALESTINE QUESTION$$ AND subject_id = $$49$$);
+Row exists: True
+Getting id from "agenda"...
+SELECT "id" FROM "agenda" WHERE "name" = 'S/79 [50] PALESTINE QUESTION';
+id found: 5726
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4051242$$ AND agenda_id = $$5726$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4051242', '5726') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+Agenda for ['4051242'] found
+Trying to get SUBJECT: INFO: No subject found. Subject value set to ['N/A']
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$N/A$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$N/A$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'N/A';
+id found: 1
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/ X The situation in the Middle East, including the Palestinian question.$$ AND subject_id = $$1$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/ X The situation in the Middle East, including the Palestinian question.$$ AND subject_id = $$1$$);
+Row exists: True
+Getting id from "agenda"...
+SELECT "id" FROM "agenda" WHERE "name" = 'S/ X The situation in the Middle East, including the Palestinian question.';
+id found: 5471
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4051242$$ AND agenda_id = $$5471$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4051242', '5471') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+COMMITTEE REPORT and RESOLUTION COMMITTEE REPORT
+
+    COMMITTEE REPORT
+SELECT EXISTS (SELECT 1 FROM committee_report WHERE symbol = $$N/A$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM committee_report WHERE symbol = $$N/A$$);
+Row exists: True
+Getting id from "committee_report"...
+SELECT "id" FROM "committee_report" WHERE "symbol" = 'N/A';
+id found: 1
+
+    RESOLUTION COMMITTEE REPORT
+SELECT EXISTS (SELECT 1 FROM resolution_committee_report WHERE resolution_id = $$4051242$$ AND committee_report_id = $$1$$);
+Row exists: False
+"resolution_committee_report" relation population started...
+INSERT INTO "resolution_committee_report" ("resolution_id", "committee_report_id") VALUES ('4051242', '1') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_committee_report" relation is successful
+
+COUNTRY and VOTE
+Country and Vote relations population started...
+Country and Vote relations have been populated
+Total votes count: 15
+**Transaction ended**
+
+---------------------------------------------
+Item 4051296 processing started...
+
+ITEM values from 4051296 collecting...
+INFO: No value for "committee_report" found. Set default value: N/A
+Done
+
+**Transaction started**
+
+TITLE
+SELECT EXISTS (SELECT 1 FROM title WHERE name = $$Security Council resolution 2734 (2024) [on reviewing and extending sanctions against Islamic State in Iraq and the Levant (Da'esh) and Al-Qaida]$$);
+Row exists: False
+"title" relation population started...
+INSERT INTO "title" ("name") VALUES ('Security Council resolution 2734 (2024) [on reviewing and extending sanctions against Islamic State in Iraq and the Levant (Da''esh) and Al-Qaida]') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "title" relation is successful
+
+MEETING RECORD
+SELECT EXISTS (SELECT 1 FROM meeting_record WHERE symbol = $$S/PV.9649$$);
+Row exists: False
+"meeting_record" relation population started...
+INSERT INTO "meeting_record" ("symbol") VALUES ('S/PV.9649') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "meeting_record" relation is successful
+
+RESOLUTION
+SELECT EXISTS (SELECT 1 FROM resolution WHERE id = $$4051296$$ AND title_id = $$5773$$ AND symbol = $$S/RES/2734(2024)$$ AND meeting_record_id = $$4177$$ AND vote_date = $$2024-06-10$$);
+Row exists: False
+"resolution" relation population started...
+INSERT INTO "resolution" ("id", "title_id", "symbol", "meeting_record_id", "vote_date") VALUES ('4051296', '5773', 'S/RES/2734(2024)', '4177', '2024-06-10') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "resolution" relation is successful
+
+SUBJECT and AGENDA
+
+Agenda for ['4051296'] found
+Trying to get SUBJECT: Found
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$TERRORISM$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$TERRORISM$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'TERRORISM';
+id found: 203
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/79 [31] TERRORISM$$ AND subject_id = $$203$$);
+Row exists: False
+"agenda" relation population started...
+INSERT INTO "agenda" ("name", "subject_id") VALUES ('S/79 [31] TERRORISM', '203') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "agenda" relation is successful
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4051296$$ AND agenda_id = $$5745$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4051296', '5745') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+Agenda for ['4051296'] found
+Trying to get SUBJECT: Found
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$INTERNATIONAL SECURITY$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$INTERNATIONAL SECURITY$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'INTERNATIONAL SECURITY';
+id found: 78
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/79 [10] INTERNATIONAL SECURITY$$ AND subject_id = $$78$$);
+Row exists: False
+"agenda" relation population started...
+INSERT INTO "agenda" ("name", "subject_id") VALUES ('S/79 [10] INTERNATIONAL SECURITY', '78') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "agenda" relation is successful
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4051296$$ AND agenda_id = $$5746$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4051296', '5746') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+Agenda for ['4051296'] found
+Trying to get SUBJECT: INFO: No subject found. Subject value set to ['N/A']
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$N/A$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$N/A$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'N/A';
+id found: 1
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/ X Threats to international peace and security caused by terrorist acts.$$ AND subject_id = $$1$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/ X Threats to international peace and security caused by terrorist acts.$$ AND subject_id = $$1$$);
+Row exists: True
+Getting id from "agenda"...
+SELECT "id" FROM "agenda" WHERE "name" = 'S/ X Threats to international peace and security caused by terrorist acts.';
+id found: 5501
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4051296$$ AND agenda_id = $$5501$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4051296', '5501') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+COMMITTEE REPORT and RESOLUTION COMMITTEE REPORT
+
+    COMMITTEE REPORT
+SELECT EXISTS (SELECT 1 FROM committee_report WHERE symbol = $$N/A$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM committee_report WHERE symbol = $$N/A$$);
+Row exists: True
+Getting id from "committee_report"...
+SELECT "id" FROM "committee_report" WHERE "symbol" = 'N/A';
+id found: 1
+
+    RESOLUTION COMMITTEE REPORT
+SELECT EXISTS (SELECT 1 FROM resolution_committee_report WHERE resolution_id = $$4051296$$ AND committee_report_id = $$1$$);
+Row exists: False
+"resolution_committee_report" relation population started...
+INSERT INTO "resolution_committee_report" ("resolution_id", "committee_report_id") VALUES ('4051296', '1') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_committee_report" relation is successful
+
+COUNTRY and VOTE
+Country and Vote relations population started...
+Country and Vote relations have been populated
+Total votes count: 15
+**Transaction ended**
+
+---------------------------------------------
+Item 4050309 processing started...
+
+ITEM values from 4050309 collecting...
+INFO: No value for "committee_report" found. Set default value: N/A
+Done
+
+**Transaction started**
+
+TITLE
+SELECT EXISTS (SELECT 1 FROM title WHERE name = $$Status of internally displaced persons and refugees from Abkhazia, Georgia, and the Tskhinvali region/South Ossetia, Georgia : resolution / adopted by the General Assembly$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM title WHERE name = $$Status of internally displaced persons and refugees from Abkhazia, Georgia, and the Tskhinvali region/South Ossetia, Georgia : resolution / adopted by the General Assembly$$);
+Row exists: True
+Getting id from "title"...
+SELECT "id" FROM "title" WHERE "name" = 'Status of internally displaced persons and refugees from Abkhazia, Georgia, and the Tskhinvali region/South Ossetia, Georgia : resolution / adopted by the General Assembly';
+id found: 4781
+
+MEETING RECORD
+SELECT EXISTS (SELECT 1 FROM meeting_record WHERE symbol = $$A/78/PV.84$$);
+Row exists: False
+"meeting_record" relation population started...
+INSERT INTO "meeting_record" ("symbol") VALUES ('A/78/PV.84') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "meeting_record" relation is successful
+
+RESOLUTION
+SELECT EXISTS (SELECT 1 FROM resolution WHERE id = $$4050309$$ AND title_id = $$4781$$ AND symbol = $$A/RES/78/283$$ AND meeting_record_id = $$4178$$ AND vote_date = $$2024-06-04$$);
+Row exists: False
+"resolution" relation population started...
+INSERT INTO "resolution" ("id", "title_id", "symbol", "meeting_record_id", "vote_date") VALUES ('4050309', '4781', 'A/RES/78/283', '4178', '2024-06-04') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "resolution" relation is successful
+
+SUBJECT and AGENDA
+
+Agenda for ['4050309'] found
+Trying to get SUBJECT: Found
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$ORGANIZATION FOR DEMOCRACY AND ECONOMIC DEVELOPMENT - GUAM$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$ORGANIZATION FOR DEMOCRACY AND ECONOMIC DEVELOPMENT - GUAM$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'ORGANIZATION FOR DEMOCRACY AND ECONOMIC DEVELOPMENT - GUAM';
+id found: 502
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$A/78/251 32 Protracted conflicts in the GUAM area and their implications for international peace, security and development. ORGANIZATION FOR DEMOCRACY AND ECONOMIC DEVELOPMENT - GUAM$$ AND subject_id = $$502$$);
+Row exists: False
+"agenda" relation population started...
+INSERT INTO "agenda" ("name", "subject_id") VALUES ('A/78/251 32 Protracted conflicts in the GUAM area and their implications for international peace, security and development. ORGANIZATION FOR DEMOCRACY AND ECONOMIC DEVELOPMENT - GUAM', '502') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "agenda" relation is successful
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4050309$$ AND agenda_id = $$5747$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4050309', '5747') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+COMMITTEE REPORT and RESOLUTION COMMITTEE REPORT
+
+    COMMITTEE REPORT
+SELECT EXISTS (SELECT 1 FROM committee_report WHERE symbol = $$N/A$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM committee_report WHERE symbol = $$N/A$$);
+Row exists: True
+Getting id from "committee_report"...
+SELECT "id" FROM "committee_report" WHERE "symbol" = 'N/A';
+id found: 1
+
+    RESOLUTION COMMITTEE REPORT
+SELECT EXISTS (SELECT 1 FROM resolution_committee_report WHERE resolution_id = $$4050309$$ AND committee_report_id = $$1$$);
+Row exists: False
+"resolution_committee_report" relation population started...
+INSERT INTO "resolution_committee_report" ("resolution_id", "committee_report_id") VALUES ('4050309', '1') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_committee_report" relation is successful
+
+COUNTRY and VOTE
+Country and Vote relations population started...
+Country and Vote relations have been populated
+Total votes count: 193
+**Transaction ended**
+
+---------------------------------------------
+Item 4050346 processing started...
+
+ITEM values from 4050346 collecting...
+INFO: No value for "committee_report" found. Set default value: N/A
+Done
+
+**Transaction started**
+
+TITLE
+SELECT EXISTS (SELECT 1 FROM title WHERE name = $$Security Council resolution 2732 (2024) [on extension of the mandate of the UN Assistance Mission for Iraq (UNAMI) until 31 Dec. 2025]$$);
+Row exists: False
+"title" relation population started...
+INSERT INTO "title" ("name") VALUES ('Security Council resolution 2732 (2024) [on extension of the mandate of the UN Assistance Mission for Iraq (UNAMI) until 31 Dec. 2025]') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "title" relation is successful
+
+MEETING RECORD
+SELECT EXISTS (SELECT 1 FROM meeting_record WHERE symbol = $$S/PV.9642$$);
+Row exists: False
+"meeting_record" relation population started...
+INSERT INTO "meeting_record" ("symbol") VALUES ('S/PV.9642') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "meeting_record" relation is successful
+
+RESOLUTION
+SELECT EXISTS (SELECT 1 FROM resolution WHERE id = $$4050346$$ AND title_id = $$5774$$ AND symbol = $$S/RES/2732(2024)$$ AND meeting_record_id = $$4179$$ AND vote_date = $$2024-05-31$$);
+Row exists: False
+"resolution" relation population started...
+INSERT INTO "resolution" ("id", "title_id", "symbol", "meeting_record_id", "vote_date") VALUES ('4050346', '5774', 'S/RES/2732(2024)', '4179', '2024-05-31') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "resolution" relation is successful
+
+SUBJECT and AGENDA
+
+Agenda for ['4050346'] found
+Trying to get SUBJECT: Found
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$UN ASSISTANCE MISSION FOR IRAQ$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$UN ASSISTANCE MISSION FOR IRAQ$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'UN ASSISTANCE MISSION FOR IRAQ';
+id found: 442
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/79 [124] UN ASSISTANCE MISSION FOR IRAQ$$ AND subject_id = $$442$$);
+Row exists: False
+"agenda" relation population started...
+INSERT INTO "agenda" ("name", "subject_id") VALUES ('S/79 [124] UN ASSISTANCE MISSION FOR IRAQ', '442') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "agenda" relation is successful
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4050346$$ AND agenda_id = $$5748$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4050346', '5748') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+Agenda for ['4050346'] found
+Trying to get SUBJECT: Found
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$IRAQ SITUATION$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$IRAQ SITUATION$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'IRAQ SITUATION';
+id found: 438
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/79 [119] IRAQ SITUATION$$ AND subject_id = $$438$$);
+Row exists: False
+"agenda" relation population started...
+INSERT INTO "agenda" ("name", "subject_id") VALUES ('S/79 [119] IRAQ SITUATION', '438') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "agenda" relation is successful
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4050346$$ AND agenda_id = $$5749$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4050346', '5749') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+Agenda for ['4050346'] found
+Trying to get SUBJECT: Found
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$IRAQ-KUWAIT SITUATION$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$IRAQ-KUWAIT SITUATION$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'IRAQ-KUWAIT SITUATION';
+id found: 225
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/79 [120] IRAQ-KUWAIT SITUATION$$ AND subject_id = $$225$$);
+Row exists: False
+"agenda" relation population started...
+INSERT INTO "agenda" ("name", "subject_id") VALUES ('S/79 [120] IRAQ-KUWAIT SITUATION', '225') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "agenda" relation is successful
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4050346$$ AND agenda_id = $$5750$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4050346', '5750') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+Agenda for ['4050346'] found
+Trying to get SUBJECT: INFO: No subject found. Subject value set to ['N/A']
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$N/A$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$N/A$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'N/A';
+id found: 1
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/ X The situation concerning Iraq.$$ AND subject_id = $$1$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/ X The situation concerning Iraq.$$ AND subject_id = $$1$$);
+Row exists: True
+Getting id from "agenda"...
+SELECT "id" FROM "agenda" WHERE "name" = 'S/ X The situation concerning Iraq.';
+id found: 5622
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4050346$$ AND agenda_id = $$5622$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4050346', '5622') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+COMMITTEE REPORT and RESOLUTION COMMITTEE REPORT
+
+    COMMITTEE REPORT
+SELECT EXISTS (SELECT 1 FROM committee_report WHERE symbol = $$N/A$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM committee_report WHERE symbol = $$N/A$$);
+Row exists: True
+Getting id from "committee_report"...
+SELECT "id" FROM "committee_report" WHERE "symbol" = 'N/A';
+id found: 1
+
+    RESOLUTION COMMITTEE REPORT
+SELECT EXISTS (SELECT 1 FROM resolution_committee_report WHERE resolution_id = $$4050346$$ AND committee_report_id = $$1$$);
+Row exists: False
+"resolution_committee_report" relation population started...
+INSERT INTO "resolution_committee_report" ("resolution_id", "committee_report_id") VALUES ('4050346', '1') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_committee_report" relation is successful
+
+COUNTRY and VOTE
+Country and Vote relations population started...
+Country and Vote relations have been populated
+Total votes count: 15
+**Transaction ended**
+
+---------------------------------------------
+Item 4050347 processing started...
+
+ITEM values from 4050347 collecting...
+INFO: No value for "committee_report" found. Set default value: N/A
+Done
+
+**Transaction started**
+
+TITLE
+SELECT EXISTS (SELECT 1 FROM title WHERE name = $$Security Council resolution 2733 (2024) [on extension of the authorizations on the inspection of vessels on the high seas off the coast of Libya for a period of 12 months]$$);
+Row exists: False
+"title" relation population started...
+INSERT INTO "title" ("name") VALUES ('Security Council resolution 2733 (2024) [on extension of the authorizations on the inspection of vessels on the high seas off the coast of Libya for a period of 12 months]') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "title" relation is successful
+
+MEETING RECORD
+SELECT EXISTS (SELECT 1 FROM meeting_record WHERE symbol = $$S/PV.9644$$);
+Row exists: False
+"meeting_record" relation population started...
+INSERT INTO "meeting_record" ("symbol") VALUES ('S/PV.9644') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "meeting_record" relation is successful
+
+RESOLUTION
+SELECT EXISTS (SELECT 1 FROM resolution WHERE id = $$4050347$$ AND title_id = $$5775$$ AND symbol = $$S/RES/2733(2024)$$ AND meeting_record_id = $$4180$$ AND vote_date = $$2024-05-31$$);
+Row exists: False
+"resolution" relation population started...
+INSERT INTO "resolution" ("id", "title_id", "symbol", "meeting_record_id", "vote_date") VALUES ('4050347', '5775', 'S/RES/2733(2024)', '4180', '2024-05-31') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "resolution" relation is successful
+
+SUBJECT and AGENDA
+
+Agenda for ['4050347'] found
+Trying to get SUBJECT: Found
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$LIBYA SITUATION$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$LIBYA SITUATION$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'LIBYA SITUATION';
+id found: 519
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/79 [219] LIBYA SITUATION$$ AND subject_id = $$519$$);
+Row exists: False
+"agenda" relation population started...
+INSERT INTO "agenda" ("name", "subject_id") VALUES ('S/79 [219] LIBYA SITUATION', '519') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "agenda" relation is successful
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4050347$$ AND agenda_id = $$5751$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4050347', '5751') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+Agenda for ['4050347'] found
+Trying to get SUBJECT: INFO: No subject found. Subject value set to ['N/A']
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$N/A$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$N/A$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'N/A';
+id found: 1
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/ X The situation in Libya.$$ AND subject_id = $$1$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/ X The situation in Libya.$$ AND subject_id = $$1$$);
+Row exists: True
+Getting id from "agenda"...
+SELECT "id" FROM "agenda" WHERE "name" = 'S/ X The situation in Libya.';
+id found: 5604
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4050347$$ AND agenda_id = $$5604$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4050347', '5604') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+COMMITTEE REPORT and RESOLUTION COMMITTEE REPORT
+
+    COMMITTEE REPORT
+SELECT EXISTS (SELECT 1 FROM committee_report WHERE symbol = $$N/A$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM committee_report WHERE symbol = $$N/A$$);
+Row exists: True
+Getting id from "committee_report"...
+SELECT "id" FROM "committee_report" WHERE "symbol" = 'N/A';
+id found: 1
+
+    RESOLUTION COMMITTEE REPORT
+SELECT EXISTS (SELECT 1 FROM resolution_committee_report WHERE resolution_id = $$4050347$$ AND committee_report_id = $$1$$);
+Row exists: False
+"resolution_committee_report" relation population started...
+INSERT INTO "resolution_committee_report" ("resolution_id", "committee_report_id") VALUES ('4050347', '1') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_committee_report" relation is successful
+
+COUNTRY and VOTE
+Country and Vote relations population started...
+Country and Vote relations have been populated
+Total votes count: 15
+**Transaction ended**
+Getting 2022 year's' resolutions...
+
+---------------------------------------------
+Item 4050114 processing started...
+
+ITEM values from 4050114 collecting...
+INFO: No value for "committee_report" found. Set default value: N/A
+Done
+
+**Transaction started**
+
+TITLE
+SELECT EXISTS (SELECT 1 FROM title WHERE name = $$Security Council resolution 2731 (2024) [on renewal of sanctions imposed by Security Council resolution 2428 (2018) until 31 May 2025 and extension of the mandate of the Panel of Experts on South Sudan until 1 July 2025]$$);
+Row exists: False
+"title" relation population started...
+INSERT INTO "title" ("name") VALUES ('Security Council resolution 2731 (2024) [on renewal of sanctions imposed by Security Council resolution 2428 (2018) until 31 May 2025 and extension of the mandate of the Panel of Experts on South Sudan until 1 July 2025]') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "title" relation is successful
+
+MEETING RECORD
+SELECT EXISTS (SELECT 1 FROM meeting_record WHERE symbol = $$S/PV.9639$$);
+Row exists: False
+"meeting_record" relation population started...
+INSERT INTO "meeting_record" ("symbol") VALUES ('S/PV.9639') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "meeting_record" relation is successful
+
+RESOLUTION
+SELECT EXISTS (SELECT 1 FROM resolution WHERE id = $$4050114$$ AND title_id = $$5776$$ AND symbol = $$S/RES/2731(2024)$$ AND meeting_record_id = $$4181$$ AND vote_date = $$2024-05-30$$);
+Row exists: False
+"resolution" relation population started...
+INSERT INTO "resolution" ("id", "title_id", "symbol", "meeting_record_id", "vote_date") VALUES ('4050114', '5776', 'S/RES/2731(2024)', '4181', '2024-05-30') ON CONFLICT DO NOTHING RETURNING "id";
+Insertion into "resolution" relation is successful
+
+SUBJECT and AGENDA
+
+Agenda for ['4050114'] found
+Trying to get SUBJECT: Found
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$SOUTH SUDAN--POLITICAL CONDITIONS$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$SOUTH SUDAN--POLITICAL CONDITIONS$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'SOUTH SUDAN--POLITICAL CONDITIONS';
+id found: 513
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/79 [223] SOUTH SUDAN--POLITICAL CONDITIONS$$ AND subject_id = $$513$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/79 [223] SOUTH SUDAN--POLITICAL CONDITIONS$$ AND subject_id = $$513$$);
+Row exists: True
+Getting id from "agenda"...
+SELECT "id" FROM "agenda" WHERE "name" = 'S/79 [223] SOUTH SUDAN--POLITICAL CONDITIONS';
+id found: 5731
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4050114$$ AND agenda_id = $$5731$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4050114', '5731') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+Agenda for ['4050114'] found
+Trying to get SUBJECT: Found
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$UN MISSION IN SOUTH SUDAN$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$UN MISSION IN SOUTH SUDAN$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'UN MISSION IN SOUTH SUDAN';
+id found: 528
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/79 [216] UN MISSION IN SOUTH SUDAN$$ AND subject_id = $$528$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/79 [216] UN MISSION IN SOUTH SUDAN$$ AND subject_id = $$528$$);
+Row exists: True
+Getting id from "agenda"...
+SELECT "id" FROM "agenda" WHERE "name" = 'S/79 [216] UN MISSION IN SOUTH SUDAN';
+id found: 5730
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4050114$$ AND agenda_id = $$5730$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4050114', '5730') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+Agenda for ['4050114'] found
+Trying to get SUBJECT: INFO: No subject found. Subject value set to ['N/A']
+
+    SUBJECT
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$N/A$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM subject WHERE name = $$N/A$$);
+Row exists: True
+Getting id from "subject"...
+SELECT "id" FROM "subject" WHERE "name" = 'N/A';
+id found: 1
+
+    AGENDA
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/ X Reports of the Secretary-General on the Sudan and South Sudan.$$ AND subject_id = $$1$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM agenda WHERE name = $$S/ X Reports of the Secretary-General on the Sudan and South Sudan.$$ AND subject_id = $$1$$);
+Row exists: True
+Getting id from "agenda"...
+SELECT "id" FROM "agenda" WHERE "name" = 'S/ X Reports of the Secretary-General on the Sudan and South Sudan.';
+id found: 5582
+
+    RESOLUTION AGENDA
+SELECT EXISTS (SELECT 1 FROM resolution_agenda WHERE resolution_id = $$4050114$$ AND agenda_id = $$5582$$);
+Row exists: False
+"resolution_agenda" relation population started...
+INSERT INTO "resolution_agenda" ("resolution_id", "agenda_id") VALUES ('4050114', '5582') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_agenda" relation is successful
+
+COMMITTEE REPORT and RESOLUTION COMMITTEE REPORT
+
+    COMMITTEE REPORT
+SELECT EXISTS (SELECT 1 FROM committee_report WHERE symbol = $$N/A$$);
+Row exists: True
+SELECT EXISTS (SELECT 1 FROM committee_report WHERE symbol = $$N/A$$);
+Row exists: True
+Getting id from "committee_report"...
+SELECT "id" FROM "committee_report" WHERE "symbol" = 'N/A';
+id found: 1
+
+    RESOLUTION COMMITTEE REPORT
+SELECT EXISTS (SELECT 1 FROM resolution_committee_report WHERE resolution_id = $$4050114$$ AND committee_report_id = $$1$$);
+Row exists: False
+"resolution_committee_report" relation population started...
+INSERT INTO "resolution_committee_report" ("resolution_id", "committee_report_id") VALUES ('4050114', '1') ON CONFLICT DO NOTHING RETURNING "resolution_id";
+Insertion into "resolution_committee_report" relation is successful
+
+COUNTRY and VOTE
+Country and Vote relations population started...
+Country and Vote relations have been populated
+Total votes count: 15
+**Transaction ended**
+Getting 2021 year's' resolutions...
+Connection closed
+5:00:00
+2024-07-09 01:46:49+05:00---End updating process logging---
