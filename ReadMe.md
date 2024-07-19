@@ -1,6 +1,6 @@
 # UN VOTES DATABASE
 
-Author and maintainer: Vadim Rudakov, vadim.rudakov@urfu.ru
+Author and maintainer: Vadim Rudakov, lefthand67@gmail.com
 
 The "UN votes" Database is a collection of normalized data of the UN voted resolutions' details  from 1946 to 2024 collected from the UN Digital Library. The authors thought this database as the source for machine learning experiments with the international relations data, such as building the predictive models for future votes or clustering countries. That is why the main goal of the database is the countries' vote results. Not all the resolutions presented have this information, but we decided to include the details on all available resolutions for those researchers who would want to conduct other type of analysis where the vote results do not play significant role.
 
