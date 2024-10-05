@@ -3339,3 +3339,462 @@
  'scheduler/enqueued/memory': 12,
  'start_time': datetime.datetime(2024, 9, 1, 13, 52, 36, 800040, tzinfo=datetime.timezone.utc)}
 2024-09-01 18:53:20 [scrapy.core.engine] INFO: Spider closed (finished)
+2024-10-05 13:58:58 [scrapy.utils.log] INFO: Scrapy 2.11.0 started (bot: un_votes_updater)
+2024-10-05 13:58:58 [scrapy.utils.log] INFO: Versions: lxml 5.1.0.0, libxml2 2.12.3, cssselect 1.2.0, parsel 1.8.1, w3lib 2.1.2, Twisted 22.10.0, Python 3.11.2 (main, Aug 26 2024, 07:20:54) [GCC 12.2.0], pyOpenSSL 24.0.0 (OpenSSL 3.2.1 30 Jan 2024), cryptography 42.0.2, Platform Linux-6.1.0-25-amd64-x86_64-with-glibc2.36
+2024-10-05 13:58:58 [scrapy.addons] INFO: Enabled addons:
+[]
+2024-10-05 13:58:58 [asyncio] DEBUG: Using selector: EpollSelector
+2024-10-05 13:58:58 [scrapy.utils.log] DEBUG: Using reactor: twisted.internet.asyncioreactor.AsyncioSelectorReactor
+2024-10-05 13:58:58 [scrapy.utils.log] DEBUG: Using asyncio event loop: asyncio.unix_events._UnixSelectorEventLoop
+2024-10-05 13:58:58 [scrapy.extensions.telnet] INFO: Telnet Password: 9c3928fb9ff7516e
+2024-10-05 13:58:58 [scrapy.middleware] INFO: Enabled extensions:
+['scrapy.extensions.corestats.CoreStats',
+ 'scrapy.extensions.telnet.TelnetConsole',
+ 'scrapy.extensions.memusage.MemoryUsage',
+ 'scrapy.extensions.logstats.LogStats',
+ 'scrapy.extensions.throttle.AutoThrottle']
+2024-10-05 13:58:58 [scrapy.crawler] INFO: Overridden settings:
+{'AUTOTHROTTLE_ENABLED': True,
+ 'AUTOTHROTTLE_MAX_DELAY': 20,
+ 'BOT_NAME': 'un_votes_updater',
+ 'CONCURRENT_REQUESTS': 1,
+ 'COOKIES_ENABLED': False,
+ 'FEED_EXPORT_ENCODING': 'utf-8',
+ 'LOG_ENABLED': False,
+ 'LOG_FILE': './logs/scrapy.log',
+ 'NEWSPIDER_MODULE': 'un_votes_updater.spiders',
+ 'REQUEST_FINGERPRINTER_IMPLEMENTATION': '2.7',
+ 'SPIDER_MODULES': ['un_votes_updater.spiders'],
+ 'TWISTED_REACTOR': 'twisted.internet.asyncioreactor.AsyncioSelectorReactor'}
+2024-10-05 13:58:58 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedBrowserType] Family: Android
+2024-10-05 13:58:59 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedDeviceType] Family: Other, Brand: None, Model: None
+2024-10-05 13:58:59 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedDeviceType] Family: Other, Brand: None, Model: None
+2024-10-05 13:58:59 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedDeviceType] Family: Other, Brand: None, Model: None
+2024-10-05 13:58:59 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedDeviceType] Family: Sony BDV13, Brand: Sony, Model: BDV13
+2024-10-05 13:58:59 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedDeviceType] Family: Nintendo DSi, Brand: Nintendo, Model: DSi
+2024-10-05 13:58:59 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedDeviceType] Family: Other, Brand: None, Model: None
+2024-10-05 13:58:59 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedBrowserType] Family: Other
+2024-10-05 13:58:59 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedDeviceType] Family: LYF F90M, Brand: LYF, Model: F90M
+2024-10-05 13:58:59 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedDeviceType] Family: Sony BDV14, Brand: Sony, Model: BDV14
+2024-10-05 13:58:59 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedDeviceType] Family: LG Web0S SmartTV, Brand: LG, Model: Web0S SmartTV
+2024-10-05 13:58:59 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedDeviceType] Family: Other, Brand: None, Model: None
+2024-10-05 13:58:59 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedDeviceType] Family: Other, Brand: None, Model: None
+2024-10-05 13:58:59 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedDeviceType] Family: Other, Brand: None, Model: None
+2024-10-05 13:58:59 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedDeviceType] Family: Other, Brand: None, Model: None
+2024-10-05 13:58:59 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedDeviceType] Family: Other, Brand: None, Model: None
+2024-10-05 13:58:59 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedDeviceType] Family: Other, Brand: None, Model: None
+2024-10-05 13:58:59 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedDeviceType] Family: Other, Brand: None, Model: None
+2024-10-05 13:58:59 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedDeviceType] Family: Sony BDV11, Brand: Sony, Model: BDV11
+2024-10-05 13:58:59 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedDeviceType] Family: Other, Brand: None, Model: None
+2024-10-05 13:58:59 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedDeviceType] Family: Other, Brand: None, Model: None
+2024-10-05 13:58:59 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedDeviceType] Family: Other, Brand: None, Model: None
+2024-10-05 13:58:59 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedDeviceType] Family: Other, Brand: None, Model: None
+2024-10-05 13:59:00 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedDeviceType] Family: Nintendo DSi, Brand: Nintendo, Model: DSi
+2024-10-05 13:59:00 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedDeviceType] Family: LYF LF-2403N, Brand: LYF, Model: LF-2403N
+2024-10-05 13:59:00 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedDeviceType] Family: LYF F90M, Brand: LYF, Model: F90M
+2024-10-05 13:59:00 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedDeviceType] Family: Other, Brand: None, Model: None
+2024-10-05 13:59:00 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedDeviceType] Family: Other, Brand: None, Model: None
+2024-10-05 13:59:00 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedBrowserType] Family: Applebot
+2024-10-05 13:59:00 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedDeviceType] Family: Other, Brand: None, Model: None
+2024-10-05 13:59:00 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedBrowserType] Family: Applebot
+2024-10-05 13:59:00 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedBrowserType] Family: Other
+2024-10-05 13:59:00 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedBrowserType] Family: Other
+2024-10-05 13:59:00 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedBrowserType] Family: PhantomJS
+2024-10-05 13:59:00 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedBrowserType] Family: SMTBot
+2024-10-05 13:59:00 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedBrowserType] Family: PhantomJS
+2024-10-05 13:59:00 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedBrowserType] Family: PhantomJS
+2024-10-05 13:59:00 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedBrowserType] Family: WebKit Nightly
+2024-10-05 13:59:00 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedBrowserType] Family: PhantomJS
+2024-10-05 13:59:00 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedDeviceType] Family: Other, Brand: None, Model: None
+2024-10-05 13:59:01 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedBrowserType] Family: PhantomJS
+2024-10-05 13:59:01 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedBrowserType] Family: PhantomJS
+2024-10-05 13:59:01 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedBrowserType] Family: Robot
+2024-10-05 13:59:01 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedDeviceType] Family: Other, Brand: None, Model: None
+2024-10-05 13:59:01 [scrapy_user_agents.user_agent_picker] WARNING: [UnsupportedBrowserType] Family: Zune
+2024-10-05 13:59:01 [scrapy.middleware] INFO: Enabled downloader middlewares:
+['scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
+ 'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
+ 'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
+ 'scrapy_user_agents.middlewares.RandomUserAgentMiddleware',
+ 'scrapy.downloadermiddlewares.retry.RetryMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware',
+ 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.RedirectMiddleware',
+ 'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware',
+ 'scrapy.downloadermiddlewares.stats.DownloaderStats']
+2024-10-05 13:59:01 [scrapy.middleware] INFO: Enabled spider middlewares:
+['scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
+ 'scrapy.spidermiddlewares.offsite.OffsiteMiddleware',
+ 'scrapy.spidermiddlewares.referer.RefererMiddleware',
+ 'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
+ 'scrapy.spidermiddlewares.depth.DepthMiddleware']
+2024-10-05 13:59:01 [psycopg.pq] DEBUG: couldn't import psycopg 'c' implementation: No module named 'psycopg_c'
+2024-10-05 13:59:01 [psycopg.pq] DEBUG: couldn't import psycopg 'binary' implementation: No module named 'psycopg_binary'
+2024-10-05 13:59:01 [scrapy.middleware] INFO: Enabled item pipelines:
+['un_votes_updater.pipelines.DatabasePipeline']
+2024-10-05 13:59:01 [scrapy.core.engine] INFO: Spider opened
+2024-10-05 13:59:01 [scrapy.extensions.logstats] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+2024-10-05 13:59:01 [scrapy.extensions.telnet] INFO: Telnet console listening on 127.0.0.1:6023
+2024-10-05 13:59:01 [scrapy_user_agents.middlewares] DEBUG: Assigned User-Agent Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36
+2024-10-05 13:59:02 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://digitallibrary.un.org/search?ln=en&cc=Voting%20Data&p=&f=&rm=&sf=year&so=a&rg=100&c=Voting%20Data&c=&of=hb&fti=0&fct__9=Vote&fct__3=2025&fti=0> (referer: None)
+2024-10-05 13:59:02 [scrapy_user_agents.middlewares] DEBUG: Assigned User-Agent Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36
+2024-10-05 13:59:08 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://digitallibrary.un.org/search?ln=en&cc=Voting%20Data&p=&f=&rm=&sf=year&so=a&rg=100&c=Voting%20Data&c=&of=hb&fti=0&fct__9=Vote&fct__3=2024&fti=0> (referer: None)
+2024-10-05 13:59:08 [scrapy_user_agents.middlewares] DEBUG: Assigned User-Agent Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36
+2024-10-05 13:59:14 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://digitallibrary.un.org/search?ln=en&cc=Voting%20Data&p=&f=&rm=&sf=year&so=a&rg=100&c=Voting%20Data&c=&of=hb&fti=0&fct__9=Vote&fct__3=2023&fti=0> (referer: None)
+2024-10-05 13:59:14 [scrapy_user_agents.middlewares] DEBUG: Assigned User-Agent Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36
+2024-10-05 13:59:15 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://digitallibrary.un.org/record/4062841?ln=en> (referer: https://digitallibrary.un.org/search?ln=en&cc=Voting%20Data&p=&f=&rm=&sf=year&so=a&rg=100&c=Voting%20Data&c=&of=hb&fti=0&fct__9=Vote&fct__3=2024&fti=0)
+2024-10-05 13:59:15 [scrapy_user_agents.middlewares] DEBUG: Assigned User-Agent Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36
+2024-10-05 13:59:15 [scrapy.core.scraper] DEBUG: Scraped from <200 https://digitallibrary.un.org/record/4062841?ln=en>
+{'agenda': ['S/79 [138] HAITI--POLITICAL CONDITIONS',
+            'S/ X The question concerning Haiti.'],
+ 'agenda_id': ['5606'],
+ 'committee_report': ['N/A'],
+ 'committee_report_id': ['1'],
+ 'country_id': ['11'],
+ 'id_record': ['4062841'],
+ 'meeting_record': ['S/PV.9735'],
+ 'meeting_record_id': ['4190'],
+ 'resolution_symbol': ['S/RES/2751(2024)'],
+ 'subject_id': ['1'],
+ 'title': ['Security Council resolution 2751 (2024) [on extension of the '
+           'mandate of the Multinational Security Support Mission in Haiti '
+           '(MSS) until 2 Oct. 2025]'],
+ 'title_id': ['5785'],
+ 'vote': ['Y ALGERIA',
+          ' Y CHINA',
+          ' Y ECUADOR',
+          ' Y FRANCE',
+          ' Y GUYANA',
+          ' Y JAPAN',
+          ' Y MALTA',
+          ' Y MOZAMBIQUE',
+          ' Y REPUBLIC OF KOREA',
+          ' Y RUSSIAN FEDERATION',
+          ' Y SIERRA LEONE',
+          ' Y SLOVENIA',
+          ' Y SWITZERLAND',
+          ' Y UNITED KINGDOM',
+          ' Y UNITED STATES'],
+ 'vote_date': ['2024-09-30']}
+2024-10-05 13:59:22 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://digitallibrary.un.org/search?c=Voting+Data&jrec=101&cc=Voting+Data&ln=en&rg=100&so=a&fct__3=2023&fct__9=Vote&sf=year> (referer: https://digitallibrary.un.org/search?ln=en&cc=Voting%20Data&p=&f=&rm=&sf=year&so=a&rg=100&c=Voting%20Data&c=&of=hb&fti=0&fct__9=Vote&fct__3=2023&fti=0)
+2024-10-05 13:59:22 [scrapy_user_agents.middlewares] DEBUG: Assigned User-Agent Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36
+2024-10-05 13:59:25 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://digitallibrary.un.org/record/4061432?ln=en> (referer: https://digitallibrary.un.org/search?ln=en&cc=Voting%20Data&p=&f=&rm=&sf=year&so=a&rg=100&c=Voting%20Data&c=&of=hb&fti=0&fct__9=Vote&fct__3=2024&fti=0)
+2024-10-05 13:59:25 [scrapy_user_agents.middlewares] DEBUG: Assigned User-Agent Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36
+2024-10-05 13:59:25 [scrapy.core.scraper] DEBUG: Scraped from <200 https://digitallibrary.un.org/record/4061432?ln=en>
+{'agenda': ['A/ES-10/2 5 Illegal Israeli actions in occupied East Jerusalem '
+            'and the rest of the Occupied Palestinian Territory. TERRITORIES '
+            'OCCUPIED BY ISRAEL--SETTLEMENT POLICY'],
+ 'agenda_id': ['2818'],
+ 'committee_report': ['N/A'],
+ 'committee_report_id': ['1'],
+ 'country_id': ['183'],
+ 'id_record': ['4061432'],
+ 'meeting_record': ['A/ES-10/PV.55'],
+ 'meeting_record_id': ['4191'],
+ 'resolution_symbol': ['A/RES/ES-10/24'],
+ 'subject_id': ['320'],
+ 'title': ['Advisory opinion of the International Court of Justice on the '
+           "legal consequences arising from Israel's policies and practices in "
+           'the Occupied Palestinian Territory, including East Jerusalem, and '
+           "from the illegality of Israel's continued presence in the Occupied "
+           'Palestinian Territory : resolution / adopted by the General '
+           'Assembly'],
+ 'title_id': ['5786'],
+ 'vote': [' AFGHANISTAN',
+          ' A ALBANIA',
+          ' Y ALGERIA',
+          ' Y ANDORRA',
+          ' Y ANGOLA',
+          ' Y ANTIGUA AND BARBUDA',
+          ' N ARGENTINA',
+          ' Y ARMENIA',
+          ' A AUSTRALIA',
+          ' A AUSTRIA',
+          ' Y AZERBAIJAN',
+          ' Y BAHAMAS',
+          ' Y BAHRAIN',
+          ' Y BANGLADESH',
+          ' Y BARBADOS',
+          ' Y BELARUS',
+          ' Y BELGIUM',
+          ' Y BELIZE',
+          '  BENIN',
+          ' Y BHUTAN',
+          ' Y BOLIVIA (PLURINATIONAL STATE OF)',
+          ' Y BOSNIA AND HERZEGOVINA',
+          ' Y BOTSWANA',
+          ' Y BRAZIL',
+          ' Y BRUNEI DARUSSALAM',
+          ' A BULGARIA',
+          ' Y BURKINA FASO',
+          ' Y BURUNDI',
+          ' Y CABO VERDE',
+          ' Y CAMBODIA',
+          ' A CAMEROON',
+          ' A CANADA',
+          '  CENTRAL AFRICAN REPUBLIC',
+          ' Y CHAD',
+          ' Y CHILE',
+          ' Y CHINA',
+          ' Y COLOMBIA',
+          ' Y COMOROS',
+          '  CONGO',
+          ' A COSTA RICA',
+          " Y COTE D'IVOIRE",
+          ' A CROATIA',
+          ' Y CUBA',
+          ' Y CYPRUS',
+          ' N CZECHIA',
+          " Y DEMOCRATIC PEOPLE'S REPUBLIC OF KOREA",
+          ' A DEMOCRATIC REPUBLIC OF THE CONGO',
+          ' A DENMARK',
+          ' Y DJIBOUTI',
+          ' Y DOMINICA',
+          ' A DOMINICAN REPUBLIC',
+          ' A ECUADOR',
+          ' Y EGYPT',
+          ' Y EL SALVADOR',
+          '  EQUATORIAL GUINEA',
+          ' Y ERITREA',
+          ' Y ESTONIA',
+          '  ESWATINI',
+          ' A ETHIOPIA',
+          ' N FIJI',
+          ' Y FINLAND',
+          ' Y FRANCE',
+          ' Y GABON',
+          ' Y GAMBIA',
+          ' A GEORGIA',
+          ' A GERMANY',
+          ' Y GHANA',
+          ' Y GREECE',
+          ' Y GRENADA',
+          ' A GUATEMALA',
+          ' Y GUINEA',
+          ' Y GUINEA-BISSAU',
+          ' Y GUYANA',
+          ' A HAITI',
+          ' Y HONDURAS',
+          ' N HUNGARY',
+          ' Y ICELAND',
+          ' A INDIA',
+          ' Y INDONESIA',
+          ' Y IRAN (ISLAMIC REPUBLIC OF)',
+          ' Y IRAQ',
+          ' Y IRELAND',
+          ' N ISRAEL',
+          ' A ITALY',
+          ' Y JAMAICA',
+          ' Y JAPAN',
+          ' Y JORDAN',
+          ' Y KAZAKHSTAN',
+          ' A KENYA',
+          ' A KIRIBATI',
+          ' Y KUWAIT',
+          ' Y KYRGYZSTAN',
+          " Y LAO PEOPLE'S DEMOCRATIC REPUBLIC",
+          ' Y LATVIA',
+          ' Y LEBANON',
+          ' Y LESOTHO',
+          ' A LIBERIA',
+          ' Y LIBYA',
+          ' A LIECHTENSTEIN',
+          ' A LITHUANIA',
+          ' Y LUXEMBOURG',
+          '  MADAGASCAR',
+          ' N MALAWI',
+          ' Y MALAYSIA',
+          ' Y MALDIVES',
+          ' Y MALI',
+          ' Y MALTA',
+          ' Y MARSHALL ISLANDS',
+          ' Y MAURITANIA',
+          ' Y MAURITIUS',
+          ' Y MEXICO',
+          ' N MICRONESIA (FEDERATED STATES OF)',
+          ' Y MONACO',
+          ' Y MONGOLIA',
+          ' Y MONTENEGRO',
+          ' Y MOROCCO',
+          ' Y MOZAMBIQUE',
+          ' Y MYANMAR',
+          ' Y NAMIBIA',
+          ' N NAURU',
+          ' A NEPAL',
+          ' A NETHERLANDS (KINGDOM OF THE)',
+          ' Y NEW ZEALAND',
+          ' Y NICARAGUA',
+          ' Y NIGER',
+          ' Y NIGERIA',
+          ' A NORTH MACEDONIA',
+          ' Y NORWAY',
+          ' Y OMAN',
+          ' Y PAKISTAN',
+          ' N PALAU',
+          ' A PANAMA',
+          ' N PAPUA NEW GUINEA',
+          ' N PARAGUAY',
+          ' Y PERU',
+          ' Y PHILIPPINES',
+          ' A POLAND',
+          ' Y PORTUGAL',
+          ' Y QATAR',
+          ' A REPUBLIC OF KOREA',
+          ' A REPUBLIC OF MOLDOVA',
+          ' A ROMANIA',
+          ' Y RUSSIAN FEDERATION',
+          ' A RWANDA',
+          ' Y SAINT KITTS AND NEVIS',
+          ' Y SAINT LUCIA',
+          ' Y SAINT VINCENT AND THE GRENADINES',
+          ' A SAMOA',
+          ' Y SAN MARINO',
+          '  SAO TOME AND PRINCIPE',
+          ' Y SAUDI ARABIA',
+          ' Y SENEGAL',
+          ' A SERBIA',
+          ' Y SEYCHELLES',
+          ' Y SIERRA LEONE',
+          ' Y SINGAPORE',
+          ' A SLOVAKIA',
+          ' Y SLOVENIA',
+          ' Y SOLOMON ISLANDS',
+          '  SOMALIA',
+          ' Y SOUTH AFRICA',
+          ' A SOUTH SUDAN',
+          ' Y SPAIN',
+          ' Y SRI LANKA',
+          ' Y SUDAN',
+          ' Y SURINAME',
+          ' A SWEDEN',
+          ' A SWITZERLAND',
+          ' Y SYRIAN ARAB REPUBLIC',
+          ' Y TAJIKISTAN',
+          ' Y THAILAND',
+          ' Y TIMOR-LESTE',
+          '  TOGO',
+          ' N TONGA',
+          ' Y TRINIDAD AND TOBAGO',
+          ' Y TUNISIA',
+          ' Y TURKMENISTAN',
+          ' N TUVALU',
+          ' Y TÜRKİYE',
+          ' Y UGANDA',
+          ' A UKRAINE',
+          ' Y UNITED ARAB EMIRATES',
+          ' A UNITED KINGDOM',
+          ' Y UNITED REPUBLIC OF TANZANIA',
+          ' N UNITED STATES',
+          ' A URUGUAY',
+          ' Y UZBEKISTAN',
+          ' A VANUATU',
+          '  VENEZUELA (BOLIVARIAN REPUBLIC OF)',
+          ' Y VIET NAM',
+          ' Y YEMEN',
+          '  ZAMBIA',
+          ' Y ZIMBABWE'],
+ 'vote_date': ['2024-09-18']}
+2024-10-05 13:59:27 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://digitallibrary.un.org/record/4061697?ln=en> (referer: https://digitallibrary.un.org/search?ln=en&cc=Voting%20Data&p=&f=&rm=&sf=year&so=a&rg=100&c=Voting%20Data&c=&of=hb&fti=0&fct__9=Vote&fct__3=2024&fti=0)
+2024-10-05 13:59:27 [scrapy_user_agents.middlewares] DEBUG: Assigned User-Agent Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36
+2024-10-05 13:59:27 [scrapy.core.scraper] DEBUG: Scraped from <200 https://digitallibrary.un.org/record/4061697?ln=en>
+{'agenda': ['S/79 [160] SUDAN--POLITICAL CONDITIONS',
+            'S/ X Reports of the Secretary-General on the Sudan and South '
+            'Sudan.'],
+ 'agenda_id': ['5582'],
+ 'committee_report': ['N/A'],
+ 'committee_report_id': ['1'],
+ 'country_id': ['11'],
+ 'id_record': ['4061697'],
+ 'meeting_record': ['S/PV.9721'],
+ 'meeting_record_id': ['4192'],
+ 'resolution_symbol': ['S/RES/2750(2024)'],
+ 'subject_id': ['1'],
+ 'title': ['Security Council resolution 2750 (2024) [on renewal of measures on '
+           'arms, finance and travel against Sudan until 12 Sept. 2025]'],
+ 'title_id': ['5787'],
+ 'vote': ['Y ALGERIA',
+          ' Y CHINA',
+          ' Y ECUADOR',
+          ' Y FRANCE',
+          ' Y GUYANA',
+          ' Y JAPAN',
+          ' Y MALTA',
+          ' Y MOZAMBIQUE',
+          ' Y REPUBLIC OF KOREA',
+          ' Y RUSSIAN FEDERATION',
+          ' Y SIERRA LEONE',
+          ' Y SLOVENIA',
+          ' Y SWITZERLAND',
+          ' Y UNITED KINGDOM',
+          ' Y UNITED STATES'],
+ 'vote_date': ['2024-09-11']}
+2024-10-05 13:59:29 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://digitallibrary.un.org/record/4060206?ln=en> (referer: https://digitallibrary.un.org/search?ln=en&cc=Voting%20Data&p=&f=&rm=&sf=year&so=a&rg=100&c=Voting%20Data&c=&of=hb&fti=0&fct__9=Vote&fct__3=2024&fti=0)
+2024-10-05 13:59:29 [scrapy_user_agents.middlewares] DEBUG: Assigned User-Agent Mozilla/5.0 (Windows NT 6.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.89 Safari/537.36
+2024-10-05 13:59:29 [scrapy.core.scraper] DEBUG: Scraped from <200 https://digitallibrary.un.org/record/4060206?ln=en>
+{'agenda': ['S/79 [57] UN INTERIM FORCE IN LEBANON',
+            'S/79 [54] MIDDLE EAST SITUATION',
+            'S/79 [52] ISRAEL--LEBANON',
+            'S/ X The situation in the Middle East.'],
+ 'agenda_id': ['5456'],
+ 'committee_report': ['N/A'],
+ 'committee_report_id': ['1'],
+ 'country_id': ['11'],
+ 'id_record': ['4060206'],
+ 'meeting_record': ['S/PV.9712'],
+ 'meeting_record_id': ['4193'],
+ 'resolution_symbol': ['S/RES/2749(2024)'],
+ 'subject_id': ['1'],
+ 'title': ['Security Council resolution 2749 (2024) [on extension of the '
+           'mandate of the UN Interim Force in Lebanon (UNIFIL) until 31 Aug. '
+           '2025]'],
+ 'title_id': ['5788'],
+ 'vote': ['Y ALGERIA',
+          ' Y CHINA',
+          ' Y ECUADOR',
+          ' Y FRANCE',
+          ' Y GUYANA',
+          ' Y JAPAN',
+          ' Y MALTA',
+          ' Y MOZAMBIQUE',
+          ' Y REPUBLIC OF KOREA',
+          ' Y RUSSIAN FEDERATION',
+          ' Y SIERRA LEONE',
+          ' Y SLOVENIA',
+          ' Y SWITZERLAND',
+          ' Y UNITED KINGDOM',
+          ' Y UNITED STATES'],
+ 'vote_date': ['2024-08-28']}
+2024-10-05 13:59:33 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://digitallibrary.un.org/search?ln=en&cc=Voting%20Data&p=&f=&rm=&sf=year&so=a&rg=100&c=Voting%20Data&c=&of=hb&fti=0&fct__9=Vote&fct__3=2022&fti=0> (referer: None)
+2024-10-05 13:59:33 [scrapy_user_agents.middlewares] DEBUG: Assigned User-Agent Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.108 Safari/537.36
+2024-10-05 13:59:38 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://digitallibrary.un.org/search?ln=en&cc=Voting%20Data&p=&f=&rm=&sf=year&so=a&rg=100&c=Voting%20Data&c=&of=hb&fti=0&fct__9=Vote&fct__3=2021&fti=0> (referer: None)
+2024-10-05 13:59:38 [scrapy_user_agents.middlewares] DEBUG: Assigned User-Agent Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36
+2024-10-05 13:59:41 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://digitallibrary.un.org/search?c=Voting+Data&jrec=101&cc=Voting+Data&ln=en&rg=100&so=a&fct__3=2022&fct__9=Vote&sf=year> (referer: https://digitallibrary.un.org/search?ln=en&cc=Voting%20Data&p=&f=&rm=&sf=year&so=a&rg=100&c=Voting%20Data&c=&of=hb&fti=0&fct__9=Vote&fct__3=2022&fti=0)
+2024-10-05 13:59:41 [scrapy_user_agents.middlewares] DEBUG: Assigned User-Agent Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36
+2024-10-05 13:59:42 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://digitallibrary.un.org/search?c=Voting+Data&jrec=101&cc=Voting+Data&ln=en&rg=100&so=a&fct__3=2021&fct__9=Vote&sf=year> (referer: https://digitallibrary.un.org/search?ln=en&cc=Voting%20Data&p=&f=&rm=&sf=year&so=a&rg=100&c=Voting%20Data&c=&of=hb&fti=0&fct__9=Vote&fct__3=2021&fti=0)
+2024-10-05 13:59:43 [scrapy.core.engine] INFO: Closing spider (finished)
+2024-10-05 13:59:43 [scrapy.statscollectors] INFO: Dumping Scrapy stats:
+{'downloader/request_bytes': 5666,
+ 'downloader/request_count': 12,
+ 'downloader/request_method_count/GET': 12,
+ 'downloader/response_bytes': 256819,
+ 'downloader/response_count': 12,
+ 'downloader/response_status_count/200': 12,
+ 'elapsed_time_seconds': 41.444595,
+ 'finish_reason': 'finished',
+ 'finish_time': datetime.datetime(2024, 10, 5, 8, 59, 43, 36397, tzinfo=datetime.timezone.utc),
+ 'httpcompression/response_bytes': 2993912,
+ 'httpcompression/response_count': 12,
+ 'item_scraped_count': 4,
+ 'log_count/DEBUG': 33,
+ 'log_count/INFO': 10,
+ 'log_count/WARNING': 45,
+ 'memusage/max': 79020032,
+ 'memusage/startup': 79020032,
+ 'request_depth_max': 1,
+ 'response_received_count': 12,
+ 'scheduler/dequeued': 12,
+ 'scheduler/dequeued/memory': 12,
+ 'scheduler/enqueued': 12,
+ 'scheduler/enqueued/memory': 12,
+ 'start_time': datetime.datetime(2024, 10, 5, 8, 59, 1, 591802, tzinfo=datetime.timezone.utc)}
+2024-10-05 13:59:43 [scrapy.core.engine] INFO: Spider closed (finished)
