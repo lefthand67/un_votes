@@ -8,10 +8,12 @@ The database is updated about once in a month to incorporate information on the 
 
 This document covers the technical details of how the database was collected and how you can work with it to get the most out of it.
 
+```
 un_votes=> SELECT * FROM get_database_statistics();
 start | end  | sessions | resolutions overall | recorded only | countries | votes
 -------+------+----------+---------------------+---------------+-----------+--------
 1946 | 2025 |       80 |                9997 |          8337 |       243 | 958652
+```
 
 # <b>Part I. How the database was collected and built</b>
 
