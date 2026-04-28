@@ -1,338 +1,445 @@
+---
+jupytext:
+  formats: ipynb,md:myst
+  main_language: sql
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.19.1
+kernelspec:
+  display_name: Bash
+  language: bash
+  name: bash
+---
+
 # UN VOTES DATABASE
 
-Author and maintainer: Vadim Rudakov, lefthand67@gmail.com
++++
 
-The "UN votes" Database is a collection of normalized data of the UN voted resolutions' details  from 1946 to 2024 collected from the UN Digital Library. The authors thought this database as the source for machine learning experiments with the international relations data, such as building the predictive models for future votes or clustering countries. That is why the main goal of the database is the countries' vote results. Not all the resolutions presented have this information, but we decided to include the details on all available resolutions for those researchers who would want to conduct other type of analysis where the vote results do not play significant role.
+Author and maintainer: Vadim Rudakov, rudakow.wadim@gmail.com
 
-The database is updated about once in a month to incorporate information on the newly voted resolutions, you can find the most recent database version following this link: https://github.com/lefthand67/un_votes
+The “UN votes” Database is a collection of normalized data of the UN voted resolutions’ details from 1946 to present, collected from the [UN Digital Library](https://digitallibrary.un.org/search?c=Voting+Data&cc=Voting+Data&ln=en). The database is intended as a source for machine learning experiments with international relations data, such as building predictive models for future votes or clustering countries. That is why the main goal of the database is the countries’ vote results. Not all the resolutions presented have this information, but we decided to include the details on all available resolutions for those researchers who would want to conduct other type of analysis where the vote results do not play significant role.
+
+The database is updated monthly to incorporate newly voted resolutions. See [RELEASE_NOTES.md](RELEASE_NOTES.md) for the current version statistics.
+
++++
+
+# Quick Start
+
++++
+
+Download the latest `un_votes.sql.gz` from [Releases](https://github.com/soviar-systems/un_votes/releases).
+
++++
+
+## Using Podman (recommended)
+
++++
+
+No local PostgreSQL installation required — everything runs inside the container. The database is automatically created and populated on first start:
+
+``` bash
+# Start PostgreSQL and restore the dump (one command)
+podman run -d --name un-votes-postgres \
+  -e POSTGRES_DB=un_votes \
+  -e POSTGRES_USER=user1 \
+  -e POSTGRES_PASSWORD=12345 \
+  -v ./un_votes.sql.gz:/docker-entrypoint-initdb.d/un_votes.sql.gz:Z \
+  docker.io/library/postgres:17
+
+# Connect to the database
+podman exec -it un-votes-postgres psql -U user1 -d un_votes
+```
+
+```{code-cell}
+podman exec un-votes-postgres psql -U user1 -d un_votes -c \
+"SELECT * FROM un.resolution
+ LIMIT 5;"
+```
+
+The first start takes about a minute while PostgreSQL processes the dump. To stop and remove the container when done: `podman rm -f un-votes-postgres`
+
+> **How it works:** the official PostgreSQL container image automatically executes any `.sql`, `.sql.gz`, or `.sh` files found in the `/docker-entrypoint-initdb.d/` directory on first startup. By mounting our dump there, the database is created and populated without any manual steps. This only happens once — subsequent container starts skip the initialization if data already exists.
+
++++
+
+## Using an existing PostgreSQL cluster (advanced)
+
++++
+
+If you already have a running PostgreSQL server and know how to administer it:
+
+``` bash
+# Create a user and database (run as a PostgreSQL superuser, e.g. postgres)
+psql -U postgres -c "CREATE USER user1 WITH PASSWORD '12345';"
+psql -U postgres -c "CREATE DATABASE un_votes WITH OWNER user1;"
+
+# Restore the dump
+gunzip -c un_votes.sql.gz | psql -U user1 -d un_votes
+
+# Connect
+psql -U user1 -d un_votes
+```
+
++++
+
+## Verify the installation
+
++++
+
+Run the built-in summary function:
+
+``` sql
+SELECT * FROM un.get_database_statistics();
+```
+
+We will show the real examples here using the direct connection to the database in the container:
+
+```{code-cell}
+podman exec un-votes-postgres psql -U user1 -d un_votes -c \
+"SELECT * FROM un.get_database_statistics();"
+```
+
+# Part I. How the database was collected and built
+
++++
 
 This document covers the technical details of how the database was collected and how you can work with it to get the most out of it.
 
-# <b>Part I. How the database was collected and built</b>
+The entire project of building the database can be divided into 3 big parts.
 
-The entire project of building the database can be divided into 3 big parts. 
+1.  Analysis of the data provided by the UN Digital Library and the database architecture elaboration. We had to decide:
 
-1. Analysis of the data provided by the UN Digital Library and the database architecture elaboration. We had to decide:
 - what kind of data was accessible to us and what kind of data should have really been stored for our purposes,
 - how to organize this data to make it easy 1) to update it with the new data, and 2) to work with for analysts,
 - what naming and data types we should choose for the database schemata.
 
-"[Architecture](#Architecture)" gives answers on how we solved this problems.
+“[Architecture](#Architecture)” gives answers on how we solved this problems.
 
-2. Next step involved gathering, processing, and sending the data from the UN Digital Library website to the PostgreSQL database.
+1.  Next step involved gathering, processing, and sending the data from the UN Digital Library website to the PostgreSQL database.
 
-For this task we wrote the crawler using the popular Python's "scrapy" module. For sending the data to the database we used another Python's module "psycopg 3". The processing pipeline was written in a way to treat each scrapy's item (i.e. all the details of one resolution) as a transaction, within which all the operations of inserting data and getting the foreign keys for already inserted data either completed successfully or aborted completely. This allowed the maintainer to be sure that all the data was consistent and keep track of bad transactions to rewrite the code during the development and test stage.
+For this task we wrote the crawler using the popular Python’s “scrapy” module. For sending the data to the database we used another Python’s module “psycopg 3”. The processing pipeline was written in a way to treat each scrapy’s item (i.e. all the details of one resolution) as a transaction, within which all the operations of inserting data and getting the foreign keys for already inserted data either completed successfully or aborted completely. This allowed the maintainer to be sure that all the data was consistent and keep track of bad transactions to rewrite the code during the development and test stage.
 
-3. And the last part was to maintain the system of logs.
+1.  And the last part was to maintain the system of logs.
 
-This step was essential to have a right to release the database to the community - we could not share the data we did not trust ourselves. Logs system was to control the correctness of two processes: 1) sending the data to the database (client side) and 2) storing the data in the database (server side), and make us be able to trace any kind of corrupted data during the database development step to make changes in the source code. We do not open our source code but we share all the logs so everyone can see the entire way of the data from the website to the database. All the scraping and sending data to the database job was automated, no hand work was implemented at all to exclude any kind of human made mistake. Logs, as the newest database version's dump, can be found here: https://github.com/lefthand67/un_votes.
+This step was essential to have a right to release the database to the community - we could not share the data we did not trust ourselves. Logs system was to control the correctness of two processes: 1) sending the data to the database (client side) and 2) storing the data in the database (server side), and make us be able to trace any kind of corrupted data during the database development step to make changes in the source code. We do not open our source code to prevent misuse that could overload the UN Digital Library servers, but we share all the logs so everyone can see the entire way of the data from the website to the database. All the scraping and sending data to the database job was automated, no hand work was implemented at all to exclude any kind of human made mistake.
 
-> Note: When the database had been built we understood that `subject_id` column should be stored only in one table, `agenda`, and we manually removed it from the `resolution_agenda` table. The database pipeline log does not reflect this change and contains the architecture with the `resolution_agenda` containing three columns (`resolution_id`, `agenda_id`, and `subject_id`). Just for mention.   
++++
 
-# <b>Part II. Working with the database</b>
+# Part II. Working with the database
+
++++
 
 ## Architecture
 
-To get the full out of the database, one should understand its architecture. If you have worked with the relational databases before and have the familiarity with the `JOIN` operation, you will quickly grasp the idea of how to work with the database. The maintainers intended to implement the classic "many-to-many" model.
++++
+
+To get the full out of the database, one should understand its architecture. If you have worked with the relational databases before and have the familiarity with the `JOIN` operation, you will quickly grasp the idea of how to work with the database. The maintainers intended to implement the classic “many-to-many” model.
 
 The architecture idea of the database comes from two sources:
-- the resolution's available details,
-- the strive for the database normalization, i.e. the principle "one string in one place" realization.
+- the resolution’s available details,
+- the strive for the database normalization, i.e. the principle “one string in one place” realization.
 
 This is the example of the typical webpage with the resolution details:
 
-<center>
-    <img src="./images/Screenshot_20240311_185702.png" alt="Figure 1. UN Resolution page on the UN Digital Library website with the details" style="width: 900px">
-    <p style="text-align: center"><i>Figure 1. UN <a href="https://digitallibrary.un.org/record/278340?ln=en">Resolution page</a> on the UN Digital Library website with the details</i></p>
+:::{figure} ./images/Screenshot_20240311_185702.png
+
+Figure 1. UN Resolution page on the UN Digital Library website with the details
+:::
 
 On the Fig. 2 you can see the attributes that have been processed to the database:
 
-<center>
-    <img src="./images/Screenshot_20240311_185702_1.png" alt="Figure 2. Attributes that came into the database" style="width: 900px">
-    <p style="text-align: center"><i>Figure 2. Attributes that came into the database on the UN Digital Library website with the details</i></p>
+:::{figure} ./images/Screenshot_20240311_185702_1.png
 
-As you may have noticed, no information on "Draft", "Note" and "Vote summary" has been deemed valuable for our purposes. These data contain no additional useful information but would have overloaded the database and slowed down its performance unnecessarily. Regarding the "Vote summary" field, this information can be easily derived from the `vote` table where we store all the votes country by country, so this information should not take its own storage space. Probably, the only reason we should somehow incorporate this information is that "NON-RECORDED" resolutions, i.e. resolutions without country-by-country votes, cannot be identified as accepted or rejected within our database. If there is a real need for such information, we will rewrite the crawler and rebuild the database, but for now this information is not included.
+Figure 2. Attributes that came into the database on the UN Digital Library website with the details
+:::
+
+As you may have noticed, no information on “Draft”, “Note” and “Vote summary” has been deemed valuable for our purposes. These data contain no additional useful information but would have overloaded the database and slowed down its performance unnecessarily. Regarding the “Vote summary” field, this information can be easily derived from the `vote` table where we store all the votes country by country, so this information should not take its own storage space. Probably, the only reason we should somehow incorporate this information is that “NON-RECORDED” resolutions, i.e. resolutions without country-by-country votes, cannot be identified as accepted or rejected within our database. If there is a real need for such information, we will rewrite the crawler and rebuild the database, but for now this information is not included.
 
 All the highlighted fields keep their names in the database, so you can easily switch between the web-page and the query result when needed.
 
+:::{note} Why the crawler filters with `fct__9=Vote`
+
+The UN Digital Library’s [Voting Data collection](https://digitallibrary.un.org/search?c=Voting+Data&cc=Voting+Data&ln=en) contains ~23,500 records in total, but only ~10,000 of them are typed as “Vote”. The remaining ~13,500 are resolutions adopted without vote (by consensus). The crawler uses the `fct__9=Vote` search facet to collect only the records where a voting procedure took place.
+
+The UN uses three adoption methods:
+
+1.  **Recorded vote** — country-by-country roll-call, our primary data.
+2.  **Non-recorded vote** — show of hands; we know the totals but no per-country breakdown. These are in the database with 0 rows in the `vote` table.
+3.  **Adopted without vote** — consensus, no voting procedure at all. These are the ~13,500 excluded records.
+
+The `fct__9=Vote` facet captures categories 1 and 2, which is exactly the right boundary for a vote analysis database. Category 3 records have no vote data whatsoever — including them would add thousands of rows to the `resolution` table with no analytical value for vote pattern research.
+:::
+
 This is the database final architecture:
 
-<center>
-    <img src="./images/architecture.png" alt="Figure 3. UN Votes Database architecture" style="width: 1200px">
-    <p style="text-align: center;"><i>Figure 3. UN Votes Database architecture</i></p>
+:::{figure} ./images/architecture.png
+
+Figure 3. UN Votes Database architecture
+:::
+
++++
 
 ## Tables
 
-Now let's take a look at the tables and their interaction with each other. 
++++
 
-There are 11 tables in the database that contain the UN resolutions data, and also there are 2 additional tables with the general info about the database (`readme_en` and `readme_ru`). This is the list of the the UN data containg tables:
+Now let’s take a look at the tables and their interaction with each other.
 
-1. `agenda`
-1. `committee_report`
-1. `country`                     
-1. `meeting_record`
-1. `resolution`
-1. `resolution_agenda`
-1. `resolution_committee_report`
-1. `subject`
-1. `title`
-1. `vote`
-1. `vote_choice`
+There are 10 tables in the database that contain the UN resolutions data, and also there is an additional bilingual table with the general info about the database (`readme`, filtered by `lang` column: `'en'` or `'ru'`). This is the list of the the UN data containg tables:
+
+1.  `agenda`
+2.  `committee_report`
+3.  `country`
+4.  `meeting_record`
+5.  `resolution`
+6.  `resolution_agenda`
+7.  `resolution_committee_report`
+8.  `title`
+9.  `vote`
+10. `vote_choice`
 
 You can see the entire list of the tables using command `\dt`, and also you can use `\d` to see the schema of each table, for example:
 
-## `resolution` table
+```{code-cell}
+podman exec un-votes-postgres psql -U user1 -d un_votes -c \
+"\dt un.*"
+```
 
-The `resolution` table is the core table - its `resolution.id` attribute binds all the tables together. But if you compare the resolution attributes on the page in the Fig. 1 and the names of tables in the tables' list you will notice that some of these attributes have their own tables and some don't. The `resolution` table has only 5 columns:
-- `id` - record number that you can use to quickly find the web page by substituting the "RECORD" word in the url `https://digitallibrary.un.org/record/RECORD?ln=en` with this id (for example, the resolution from the Figure 1 has `id = 278340` and its web address is, then, "https://digitallibrary.un.org/record/278340?ln=en")
+## “resolution” table
+
++++
+
+The `resolution` table is the core table - its `resolution.id` attribute binds all the tables together. But if you compare the resolution attributes on the page in the Fig. 1 and the names of tables in the tables’ list you will notice that some of these attributes have their own tables and some don’t. The `resolution` table has only 5 columns:
+- `id` - record number that you can use to quickly find the web page by substituting the “RECORD” word in the url `https://digitallibrary.un.org/record/RECORD?ln=en` with this id (for example, the resolution from the Figure 1 has `id = 278340` and its web address is, then, “https://digitallibrary.un.org/record/278340?ln=en”)
 - `title_id`,
 - `symbol` is the UN documentation standard, see https://research.un.org/en/docs/symbols for details,
 - `meeting_record_id`,
 - `vote_date`.
 
-<center>
-    <img src="./images/Screenshot_20240323_180108.png" alt="Figure 4. `resolution` table schema" style="width: 1200px">
-    <p style="text-align: center;"><i>Figure 4. <code>resolution</code> table schema</i></p>
-
-### How resolution's attributes are stored 
-
-The `resolution` table has only a few attributes because some resolutions' attributes may have more than one distinct value. There are only three such attributes: `agenda`, `committee_report`, and `vote`, all of them have gotten their own tables for data integrity purposes (see details how to use them in later sections). 
-
-Consider example (see Fig. 5). The resolution with the id `518324` has eight (!) values for agenda. We send these values to the `agenda` table where each new agenda value gets its unique id (do not mention `subject_id` for now):
-
-```sql
-un_votes=> SELECT * FROM agenda WHERE id = 3537;
-```
-```
-  id  |                 name                  | subject_id 
-------+---------------------------------------+------------
- 3537 | S/59 [60] FORMER YUGOSLAVIA SITUATION |        246
-(1 row)
+```{code-cell}
+podman exec un-votes-postgres psql -U user1 -d un_votes -c \
+"\d un.resolution"
 ```
 
-Then we update an intermediary table called `resolution_agenda` that have two columns - `resolution_id` (the foreign key to `resolution.id`) and `agenda_id` (the foreign key to `agenda.id`):
+### How resolution’s attributes are stored
 
-```sql
-un_votes=> SELECT * FROM resolution_agenda WHERE resolution_id = 518324;
++++
+
+The `resolution` table has only a few attributes because some resolutions’ attributes may have more than one distinct value. There are only three such attributes: `agenda`, `committee_report`, and `vote`, all of them have gotten their own tables for data integrity purposes (see details how to use them in later sections).
+
+Consider example for the resolution with id `518324`. It has ten (!) values for agenda:
+
+:::{figure} ./images/Screenshot_20260427_204309.jpeg
+
+Figure 5. Eight values for [agenda](https://digitallibrary.un.org/record/518324?ln=en)
+:::
+
+Here’s the record in our database, no agenda column:
+
+```{code-cell}
+podman exec un-votes-postgres psql -U user1 -d un_votes -c \
+"SELECT * FROM un.resolution 
+WHERE id = 518324;"
 ```
-```
- resolution_id | agenda_id 
----------------+-----------
-        518324 |      3536
-        518324 |      3537
-        518324 |      3553
-        518324 |      3578
-        518324 |      3579
-        518324 |      3580
-        518324 |      3581
-        518324 |      3582
-(8 rows)
+
+We send all 8 agenda values to the `agenda` table where each new agenda value gets its unique id:
+
+```{code-cell}
+podman exec un-votes-postgres psql -U user1 -d un_votes -c \
+"SELECT * FROM un.agenda 
+WHERE name ~* 'S/59.*65.*croatia situation.*';"
 ```
 
-<center>
-    <img src="./images/Screenshot_20240321_012207.png" alt="Figure 5. Eight values for agenda" style="width: 900px">
-    <p style="text-align: center"><i>Figure 5. Eight values for <a href="https://digitallibrary.un.org/record/518324?ln=en">agenda</a></i></p>
+Then we update an intermediary table called `resolution_agenda` that have two columns - `resolution_id` (the foreign key to `resolution.id`) and `agenda_id` (the foreign key to `agenda.id`).
 
-Here you can see the top 10 resolutions with the highest number of `agenda` values:
+Thus, we get all the agendas for the given resolution in the intermediate table `resolution_agenda`:
 
-```sql
-un_votes=> SELECT resolution_id, count(resolution_id) AS cnt 
-FROM resolution_agenda 
+```{code-cell}
+podman exec un-votes-postgres psql -U user1 -d un_votes -c \
+"SELECT * FROM un.resolution_agenda 
+WHERE resolution_id = 518324;"
+```
+
+```{code-cell}
+podman exec un-votes-postgres psql -U user1 -d un_votes -c \
+"SELECT a.name AS agenda_name
+FROM un.resolution_agenda ra
+JOIN un.agenda a ON ra.agenda_id = a.id
+JOIN un.resolution r ON ra.resolution_id = r.id
+JOIN un.title t ON r.title_id = t.id
+WHERE ra.resolution_id = 518324;"
+```
+
+```{code-cell}
+podman exec un-votes-postgres psql -U user1 -d un_votes -c \
+"SELECT * FROM un.agenda WHERE id = 9327
+LIMIT 5;"
+```
+
+Here you can see the top 10 resolutions with the largest number of `agenda` values:
+
+```{code-cell}
+podman exec un-votes-postgres psql -U user1 -d un_votes -c \
+"-- Top 10 resolutions with the most agenda items
+SET search_path TO un;
+SELECT
+    resolution_id,
+    count(resolution_id) AS cnt   -- how many agenda items this resolution has
+FROM resolution_agenda
 GROUP BY resolution_id
 ORDER BY cnt DESC
-LIMIT 10;
-```
-```
- resolution_id | cnt 
----------------+-----
-        518324 |   8
-       3979310 |   5
-        285170 |   5
-       1324646 |   5
-        418338 |   5
-        285563 |   5
-        283223 |   5
-        853289 |   5
-        574516 |   5
-        284150 |   4
-(10 rows)
+LIMIT 10;"
 ```
 
 and the same rating for `committee_report`:
 
-```sql
-un_votes=> SELECT resolution_id, count(resolution_id) AS cnt 
+```{code-cell}
+podman exec un-votes-postgres psql -U user1 -d un_votes -c \
+"-- Top 10 resolutions with the most committee reports
+SET search_path TO un;
+SELECT
+    resolution_id,
+    count(resolution_id) AS cnt   -- how many committee reports this resolution has
 FROM resolution_committee_report
 GROUP BY resolution_id
 ORDER BY cnt DESC
-LIMIT 10;
-```
-```
- resolution_id | cnt 
----------------+-----
-        670663 |   4
-        667226 |   4
-        663787 |   3
-        670297 |   3
-        671166 |   3
-        664380 |   3
-        279828 |   3
-        663789 |   3
-        670969 |   3
-        671254 |   3
-(10 rows)
+LIMIT 10;"
 ```
 
-### `JOIN` all the attributes
+### JOIN all the attributes
 
-Now we can `JOIN` these tables to get the information view similar to orginal (see Fig. 1) using this query:
++++
 
-```sql
-SELECT resolution.id AS record,
-       title.name AS title,
-       agenda.name AS agenda,
-       resolution.symbol AS resolution,
-       meeting_record.symbol AS meeting_record,
-       committee_report.symbol AS committee_report,
-       resolution.vote_date AS vote_date   
-FROM resolution
-JOIN title ON resolution.title_id = title.id
-JOIN resolution_agenda ON resolution.id = resolution_agenda.resolution_id
-JOIN agenda ON resolution_agenda.agenda_id = agenda.id
-JOIN meeting_record ON resolution.meeting_record_id = meeting_record.id
-JOIN resolution_committee_report ON resolution.id = resolution_committee_report.resolution_id
-JOIN committee_report ON resolution_committee_report.committee_report_id = committee_report.id
-WHERE resolution.symbol ~ '^A'
-ORDER BY vote_date DESC
-\gx
+Now we can `JOIN` these tables to get the the original information (you can also change the format view to resemble the website format adding `\gx` to the end of the command in terminal):
+
+```{code-cell}
+podman exec un-votes-postgres psql -U user1 -d un_votes -c \
+"SET search_path TO un;
+-- All GA resolutions with full details (no votes)
+SELECT
+    r.id AS record,               -- resolution ID, also matches UN Digital Library record ID
+    t.name AS title,              -- resolution title
+    a.name AS agenda,             -- agenda item text
+    r.symbol AS resolution,       -- UN document symbol (A/RES/...)
+    mr.symbol AS meeting_record,  -- meeting record symbol
+    cr.symbol AS committee_report,-- committee report symbol
+    r.vote_date                   -- date the vote took place
+FROM resolution r
+JOIN title t ON r.title_id = t.id
+JOIN resolution_agenda ra ON r.id = ra.resolution_id
+JOIN agenda a ON ra.agenda_id = a.id
+JOIN meeting_record mr ON r.meeting_record_id = mr.id
+JOIN resolution_committee_report rc ON r.id = rc.resolution_id
+JOIN committee_report cr ON rc.committee_report_id = cr.id
+WHERE r.symbol ~ '^A'             -- only General Assembly resolutions
+ORDER BY r.vote_date DESC
+LIMIT 5;"
 ```
 
-This command will return all the attributes for the resolutions voted in the General Assembly, except for the vote, for each resolution in the descending order:
-
-<center>
-    <img src="./images/Screenshot_20240321_014520.png" alt="Figure 6. JOIN query result" style="width: 1200px">
-    <p style="text-align: center"><i>Figure 6. JOIN query result</i></p>
+This command returned all the attributes for the resolutions voted in the General Assembly, except for the vote, for each resolution in the descending order.
 
 And this command will return the same attributes but also the vote of the Egypt:
 
-```sql
-SELECT resolution.id AS record,
-       title.name AS title,
-       agenda.name AS agenda,
-       resolution.symbol AS resolution,
-       meeting_record.symbol AS meeting_record,
-       committee_report.symbol AS committee_report,
-       resolution.vote_date AS vote_date,
-       vote.vote_choice_id AS Egypt_vote
-FROM resolution
-JOIN title ON resolution.title_id = title.id
-JOIN resolution_agenda ON resolution.id = resolution_agenda.resolution_id
-JOIN agenda ON resolution_agenda.agenda_id = agenda.id
-JOIN meeting_record ON resolution.meeting_record_id = meeting_record.id
-JOIN resolution_committee_report ON resolution.id = resolution_committee_report.resolution_id
-JOIN committee_report ON resolution_committee_report.committee_report_id = committee_report.id
-JOIN vote ON resolution.id = vote.resolution_id
-WHERE resolution.symbol ~ '^A' AND vote.country_id = (SELECT id FROM country WHERE name ~* '.*egypt*') 
-ORDER BY vote_date DESC
-\gx
+```{code-cell}
+podman exec un-votes-postgres psql -U user1 -d un_votes -c \
+"SET search_path TO un;
+-- All GA resolutions with Egypt's vote in each
+SELECT
+    r.id AS record,
+    t.name AS title,
+    a.name AS agenda,
+    r.symbol AS resolution,
+    mr.symbol AS meeting_record,
+    cr.symbol AS committee_report,
+    r.vote_date,
+    vc.choice AS egypt_vote       -- resolved vote_choice_id to 'yes'/'no'/'abstentions'/'non-voting'
+FROM resolution r
+JOIN title t ON r.title_id = t.id
+JOIN resolution_agenda ra ON r.id = ra.resolution_id
+JOIN agenda a ON ra.agenda_id = a.id
+JOIN meeting_record mr ON r.meeting_record_id = mr.id
+JOIN resolution_committee_report rc ON r.id = rc.resolution_id
+JOIN committee_report cr ON rc.committee_report_id = cr.id
+JOIN vote v ON r.id = v.resolution_id
+JOIN vote_choice vc ON v.vote_choice_id = vc.id
+WHERE r.symbol ~ '^A'
+  AND v.country_id = (            -- subquery: find Egypt's country_id by name (case-insensitive)
+      SELECT id FROM country WHERE name ~* '.*egypt.*'
+  )
+ORDER BY r.vote_date DESC
+LIMIT 5;"
 ```
 
-<center>
-    <img src="./images/Screenshot_20240321_014639.png" alt="Figure 7. JOIN query result with the Egypt vote" style="width: 1200px">
-    <p style="text-align: center"><i>Figure 7. JOIN query result with the Egypt vote</i></p>
+If you’re struggling in understanding this syntax, please, consider learning SQL basic commands and relational databases design models (for example: “[PostgreSQL for Everybody](https://www.coursera.org/specializations/postgresql-for-everybody)”).
 
-> Note:  `1` in `egypt_vote` means `yes`, see `vote_choice` table.
++++
 
-If you're struggling in understanding this syntax, please, consider learning SQL basic commands and relational databases design models (for example: "[PostgreSQL for Everybody](https://www.coursera.org/specializations/postgresql-for-everybody)").
+## “agenda” table
 
-## `agenda` and `subject` tables
++++
 
-Figure 1 shows no special `subject` field but if you carefully look at the `agenda` string for the resolutions adopted after 1983, you will notice that the last part of the string is capitalized:
+The `agenda` table contains two columns:
 
-<center>
-    <img src="./images/Screenshot_20240323_185659.png" alt="Figure 8. Agenda strings newer than 1983 examples" style="width: 1200px">
-    <p style="text-align: center"><i>Figure 8. Agenda strings newer than 1983 examples</i></p>
-
-This is the `subject` that describes the `agenda` in a more general manner so one can use it as an additional tool for filtering the search. The problem is the `subject` as a special part of the `agenda` string has started appearing on a systematic basis only since the 1983 year in the General Assembly resolutions (you can find a few occasional cases in 1960 and 1967 though) and 1985 in the Security Council resolutions. We extracted the `subject` from `agenda` and created an additional table `subject` because this value is used as one of the search filters on the UN Digital Library website and it really can help the analyst in their work (remembering that one can rely on `subject` only for resolutions adopted since 1983!). 
-
-> Note: If there was no pattern for `subject` in the `agenda` filed found, the `subject` got "N/A" default value:
-
-```sql
-un_votes=> SELECT * FROM subject LIMIT 5;
-```
-```
- id |                             name                              
-----+---------------------------------------------------------------
-  1 | N/A
-  2 | UN. GENERAL ASSEMBLY (15TH SESS. : 1960-1961)--GENERAL DEBATE
-  3 | MIDDLE EAST SITUATION
-  4 | AFRICA--NUCLEAR-WEAPON-FREE ZONES
-  5 | WEAPONS OF MASS DESTRUCTION--PROHIBITION--AGREEMENT (DRAFT)
-(5 rows)
+```{code-cell}
+podman exec un-votes-postgres psql -U user1 -d un_votes -c \
+"\d un.agenda"
 ```
 
-The `agenda` table is bound with the `subject` by the foreign key:
+Figure 1 shows no special `subject` field but if you carefully look at the `agenda` string for the resolutions adopted after 1983, you will notice that the last part of the string is often capitalized:
 
-<center>
-    <img src="./images/Screenshot_20240321_021919.png" alt="Figure 9. Subject and Agenda tables interconnection example" style="width: 1200px">
-    <p style="text-align: center"><i>Figure 9. Subject and Agenda tables interconnection example</i></p>
+:::{figure} ./images/Screenshot_20240323_185659.png
 
-The `agenda` table contains three columns:
-- `id`, 
-- `name`,
-- `subject_id`.
+Figure 8. Agenda strings newer than 1983 examples
+:::
 
-The `subject` table contains two columns:
-- `id`,
-- `name`.
+The capitalized portion is a **subject** that describes the `agenda` in a more general manner. Previously, we extracted this into a separate `subject` table, but the extraction was unreliable (the UN does not use a consistent format — early resolutions have no subject at all, and Security Council agenda strings follow entirely different patterns). Since the subject is derivable from the agenda string itself, maintaining it as a separate table was a normalization violation with no practical benefit.
 
-## `committee_report` table
+> **Working with Subjects:** If you need subject-level filtering, you can perform pattern-based filtering on `agenda.name` using SQL. Subjects are often embedded within the `agenda.name` field (typically after a double dash `--`). Since the format is inconsistent, we recommend using `LIKE` or `ILIKE` patterns for specific categories (e.g., `WHERE name ILIKE '%--%DISARMAMENT%'`). For official UN subject taxonomies, please refer to the [UN Digital Library search page](https://digitallibrary.un.org/search?cc=Voting%20Data&ln=en&p=&f=&rm=&sf=&so=d&rg=50&c=Voting%20Data&c=&of=hb&fti=0&fti=0).
+
++++
+
+## “committee_report” table
+
++++
 
 This table contains two columns:
-- `id`, and
-- `symbol` (UN Documentation standard).
+
+```{code-cell}
+podman exec un-votes-postgres psql -U user1 -d un_votes -c \
+"\d un.committee_report"
+```
 
 One resolution may have:
 - zero,
 - one,
 - many
 
-`committee_report` values. That is why the additional - `resolution_committee_report` - table was created, designed for binding `resolution.id`s and their corresponding `committee_report.id` values:
+`committee_report` values.
 
-```sql
-un_votes=> SELECT * FROM resolution_committee_report LIMIT 10;
-```
-```
- resolution_id | committee_report_id 
----------------+---------------------
-        280467 |                   1
-        280489 |                   1
-        671195 |                   2
-        671185 |                   3
-        671187 |                   4
-        671188 |                   5
-        671189 |                   6
-        671191 |                   7
-        671191 |                   8
-        671192 |                   7
-(10 rows)
+That is why the additional - `resolution_committee_report` - table was created, designed for binding `resolution.id`s and their corresponding `committee_report.id` values:
+
+```{code-cell}
+podman exec un-votes-postgres psql -U user1 -d un_votes -c \
+"SELECT * FROM un.resolution_committee_report LIMIT 10;"
 ```
 
-## `country` table
+## “country” table
 
-As the crawler processed the data year by year starting from 1946 to our days, all the countries got into the `country` table in the order they were represented in the UN bodies: General Assembly and Security Council. Thus, if one calls the query:
-
-```sql
-SELECT * FROM country ORDER BY id DESC;
+```{code-cell}
+podman exec un-votes-postgres psql -U user1 -d un_votes -c \
+"\d un.country"
 ```
 
-they will see the list of countries in the order similar to the one these contries became the members of the UN. By the way, this is not be taken as the ultimate truth: the scaper processed the records not in the straight sequential order, but rather it took two neighboring years and scraped the records from December to January in the backward manner, i.e. from the bigger year to the smaller. For example, the crawler selected 1946 and 1947 years, then it scraped the records through December 1947 to January 1946, then it took 1948 and 1950 and repeated the algorithm. But one can use the above method as a tool for general understanding which countries became the UN members earlier and which later.
+The crawler processes data year by year starting from 1946 to present, so countries appear in the `country` table roughly in the order they first voted in the UN bodies (General Assembly and Security Council). This can be used as a rough indicator of when a country joined the UN, but should not be taken as the ultimate truth — the order depends on which resolution within a year the country first appears in.
 
-The `country` table consists of two columns:
-- `id`,
-- `name`.
+## “meeting_record” table
 
-## `meeting_record` table
+```{code-cell}
+podman exec un-votes-postgres psql -U user1 -d un_votes -c \
+"\d un.meeting_record"
+```
 
 This table contains two columns:
 - `id`, and
@@ -340,266 +447,264 @@ This table contains two columns:
 
 There can only be one `meeting_record` value for the resolution, but many resolutions may share the same `meeting_record`.
 
-## `title` table
+## “title” table
 
-This table also contains two columns:
-- `id`, and
-- `name`.
+```{code-cell}
+podman exec un-votes-postgres psql -U user1 -d un_votes -c \
+"\d un.title"
+```
 
 There can only be one `title` value for the resolution, but many resolutions may share the same `title`.
 
-## `vote` table
+## “vote” table
 
-This table has been the main purpose of the database - each contry's vote results that you can use for interesting analyses. 
+```{code-cell}
+podman exec un-votes-postgres psql -U user1 -d un_votes -c \
+"\d un.vote"
+```
+
+This table has been the main purpose of the database - each contry’s vote results that you can use for interesting analyses.
 
 This table contains only foreign keys:
 - `resolution_id`,
 - `country_id`,
 - `vote_choice_id`
 
-that you can use to get the vote of the country you are interested in for the given resolution. 
+that you can use to get the vote of the country you are interested in for the given resolution.
 
-## `vote_choice` table
+## “vote_choice” table
 
-This additional table contains only 4 rows - one row for each possible vote choice: 'yes', 'no', 'abstentions', and 'non-voting'. If you look at the Fig. 1 example, you will see that the `vote` field uses empty string for non-voting countries and 'Y', 'N' and 'A' for other variants. We processed these values, changed them to the numbers on our choice, and created this table with the explanation of the vote result:
-
-```sql
-un_votes=> SELECT * FROM vote_choice;
+```{code-cell}
+podman exec un-votes-postgres psql -U user1 -d un_votes -c \
+"\d un.vote_choice"
 ```
-```
- id |   choice    |    choice_ru     
-----+-------------+------------------
-  0 | no          | против
-  1 | yes         | за
-  2 | abstentions | воздержавшиеся
-  3 | non-voting  | без права голоса
-(4 rows)
+
+This additional table contains only 4 rows - one row for each possible vote choice: ‘yes’, ‘no’, ‘abstentions’, and ‘non-voting’. If you look at the Fig. 1 example, you will see that the `vote` field uses empty string for non-voting countries and ‘Y’, ‘N’ and ‘A’ for other variants. We processed these values, changed them to the numbers on our choice, and created this table with the explanation of the vote result:
+
+```{code-cell}
+podman exec un-votes-postgres psql -U user1 -d un_votes -c \
+"SELECT * FROM un.vote_choice;"
 ```
 
 If you have any questions or suggestions, feel free to contact the maintainer.
 
-# <b>Part III. SQL queries examples</b>
+# Part III. SQL queries examples
 
 Use `\pset format wrapped` command to get the lines in console wrapped for the better view experience.
 
 ## Database summary information
 
-There is a function (English and Russian versions) in the database that you can use to quickly see the summary information about the database, like the number of sessions, number of recorded resolutions, etc. Just call:
+See [Quick Start](#quick-start) for usage of `un.get_database_statistics()` and a sample query.
 
-```sql
-SELECT * FROM get_database_statistics();
-```
-and for Russian:
-```sql
-SELECT * FROM get_database_statistics_ru();
-```
+## “JOIN” all details, except for “vote”
 
-This is the syntax of the procedure:
-
-```sql
-CREATE OR REPLACE FUNCTION get_database_statistics()
-RETURNS TABLE (
-    "start" NUMERIC,
-    "end" NUMERIC,
-    "sessions" BIGINT,
-    "resolutions overall" BIGINT,
-    "recorded only" BIGINT,
-    "countries" BIGINT,
-    "votes" BIGINT
-) AS $$
-BEGIN
-    RETURN QUERY
-    SELECT
-        MIN(EXTRACT(YEAR FROM vote_date)) AS "start",
-        MAX(EXTRACT(YEAR FROM vote_date)) AS "end",
-        COUNT(DISTINCT EXTRACT(YEAR FROM vote_date)) AS "sessions",
-        COUNT(resolution.id) AS "resolutions overall",
-        (SELECT COUNT(DISTINCT(resolution_id)) FROM vote) AS "recorded only",
-        (SELECT COUNT(name) FROM country) AS "countries",
-        (SELECT COUNT(*) FROM vote) AS "votes"
-    FROM resolution;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE OR REPLACE FUNCTION get_database_statistics_ru()
-RETURNS TABLE (
-    "начало" NUMERIC,
-    "конец" NUMERIC,
-    "сессии" BIGINT,
-    "резолюции всего" BIGINT,
-    "резолюции с голосами" BIGINT,
-    "страны" BIGINT,
-    "голоса" BIGINT
-) AS $$
-BEGIN
-    RETURN QUERY
-    SELECT
-        MIN(EXTRACT(YEAR FROM vote_date)) AS "начало",
-        MAX(EXTRACT(YEAR FROM vote_date)) AS "конец",
-        COUNT(DISTINCT EXTRACT(YEAR FROM vote_date)) AS "сессии",
-        COUNT(resolution.id) AS "резолюции всего",
-        (SELECT COUNT(DISTINCT(resolution_id)) FROM vote) AS "резолюции с голосами",
-        (SELECT COUNT(name) FROM country) AS "страны",
-        (SELECT COUNT(*) FROM vote) AS "голоса"
-    FROM resolution;
-END;
-$$ LANGUAGE plpgsql;
-SELECT * FROM get_database_statistics_ru();
+```{code-cell}
+podman exec un-votes-postgres psql -U user1 -d un_votes -c \
+"-- All resolutions with full details (both GA and SC, no votes)
+SET search_path TO un;
+SELECT
+    r.id AS record,
+    t.name AS title,
+    a.name AS agenda,
+    r.symbol AS resolution,
+    mr.symbol AS meeting_record,
+    cr.symbol AS committee_report,
+    r.vote_date
+FROM resolution r
+JOIN title t ON r.title_id = t.id
+JOIN resolution_agenda ra ON r.id = ra.resolution_id
+JOIN agenda a ON ra.agenda_id = a.id
+JOIN meeting_record mr ON r.meeting_record_id = mr.id
+JOIN resolution_committee_report rc ON r.id = rc.resolution_id
+JOIN committee_report cr ON rc.committee_report_id = cr.id
+LIMIT 5;"
 ```
 
-## `JOIN` all details, except for `vote`
+## “JOIN” all details only for GA, except for “vote”
 
-```sql
-SELECT resolution.id AS record,
-       title.name AS title,
-       agenda.name AS agenda,
-       subject.name AS subject,
-       resolution.symbol AS resolution,
-       meeting_record.symbol AS meeting_record,
-       committee_report.symbol AS committee_report,
-       resolution.vote_date AS vote_date   
-FROM resolution
-JOIN title ON resolution.title_id = title.id
-JOIN resolution_agenda ON resolution.id = resolution_agenda.resolution_id
-JOIN agenda ON resolution_agenda.agenda_id = agenda.id
-JOIN subject ON agenda.subject_id = subject.id
-JOIN meeting_record ON resolution.meeting_record_id = meeting_record.id
-JOIN resolution_committee_report ON resolution.id = resolution_committee_report.resolution_id
-JOIN committee_report ON resolution_committee_report.committee_report_id = committee_report.id
-\gx
+```{code-cell}
+podman exec un-votes-postgres psql -U user1 -d un_votes -c \
+"-- Same as above, filtered to General Assembly resolutions only
+SET search_path TO un;
+SELECT
+    r.id AS record,
+    t.name AS title,
+    a.name AS agenda,
+    r.symbol AS resolution,
+    mr.symbol AS meeting_record,
+    cr.symbol AS committee_report,
+    r.vote_date
+FROM resolution r
+JOIN title t ON r.title_id = t.id
+JOIN resolution_agenda ra ON r.id = ra.resolution_id
+JOIN agenda a ON ra.agenda_id = a.id
+JOIN meeting_record mr ON r.meeting_record_id = mr.id
+JOIN resolution_committee_report rc ON r.id = rc.resolution_id
+JOIN committee_report cr ON rc.committee_report_id = cr.id
+WHERE r.symbol ~ '^A'            -- GA resolutions start with 'A'
+LIMIT 5;"
 ```
 
-## `JOIN` all details only for GA, except for `vote`
-
-```sql
-SELECT resolution.id AS record,
-       title.name AS title,
-       agenda.name AS agenda,
-       subject.name AS subject,
-       resolution.symbol AS resolution,
-       meeting_record.symbol AS meeting_record,
-       committee_report.symbol AS committee_report,
-       resolution.vote_date AS vote_date   
-FROM resolution
-JOIN title ON resolution.title_id = title.id
-JOIN resolution_agenda ON resolution.id = resolution_agenda.resolution_id
-JOIN agenda ON resolution_agenda.agenda_id = agenda.id
-JOIN subject ON agenda.subject_id = subject.id
-JOIN meeting_record ON resolution.meeting_record_id = meeting_record.id
-JOIN resolution_committee_report ON resolution.id = resolution_committee_report.resolution_id
-JOIN committee_report ON resolution_committee_report.committee_report_id = committee_report.id
-WHERE resolution.symbol ~ '^A'
-\gx
-```
-
-## `JOIN` `vote` results of one `country` for each resolution
+## “JOIN” “vote” results of one “country” for each resolution
 
 For example Egypt, in descending order by date
 
-```sql
-SELECT resolution.id AS record,
-       title.name AS title,
-       agenda.name AS agenda,
-       subject.name AS subject,
-       resolution.symbol AS resolution,
-       meeting_record.symbol AS meeting_record,
-       committee_report.symbol AS committee_report,
-       resolution.vote_date AS vote_date,
-       vote.vote_choice_id AS Egypt_vote
-FROM resolution
-JOIN title ON resolution.title_id = title.id
-JOIN resolution_agenda ON resolution.id = resolution_agenda.resolution_id
-JOIN agenda ON resolution_agenda.agenda_id = agenda.id
-JOIN subject ON agenda.subject_id = subject.id
-JOIN meeting_record ON resolution.meeting_record_id = meeting_record.id
-JOIN resolution_committee_report ON resolution.id = resolution_committee_report.resolution_id
-JOIN committee_report ON resolution_committee_report.committee_report_id = committee_report.id
-JOIN vote ON resolution.id = vote.resolution_id
-WHERE vote.country_id = (SELECT id FROM country WHERE name ~* '.*egypt*')
-ORDER BY vote_date DESC
-\gx
+```{code-cell}
+podman exec un-votes-postgres psql -U user1 -d un_votes -c \
+"-- All GA resolutions with Egypt's vote
+SET search_path TO un;
+SELECT
+    r.id AS record,
+    t.name AS title,
+    a.name AS agenda,
+    r.symbol AS resolution,
+    mr.symbol AS meeting_record,
+    cr.symbol AS committee_report,
+    r.vote_date,
+    vc.choice AS egypt_vote       -- 'yes', 'no', 'abstentions', or 'non-voting'
+FROM resolution r
+JOIN title t ON r.title_id = t.id
+JOIN resolution_agenda ra ON r.id = ra.resolution_id
+JOIN agenda a ON ra.agenda_id = a.id
+JOIN meeting_record mr ON r.meeting_record_id = mr.id
+JOIN resolution_committee_report rc ON r.id = rc.resolution_id
+JOIN committee_report cr ON rc.committee_report_id = cr.id
+JOIN vote v ON r.id = v.resolution_id
+JOIN vote_choice vc ON v.vote_choice_id = vc.id
+WHERE r.symbol ~ '^A'
+  AND v.country_id = (
+      SELECT id FROM country WHERE name ~* '.*egypt.*'
+  )
+ORDER BY r.vote_date DESC
+LIMIT 5;"
 ```
 
-## Get the records from the special year
+## Get the records from a specific year
 
-```sql
-SELECT * FROM resolution 
-WHERE EXTRACT(YEAR FROM vote_date) = 2024;
+```{code-cell}
+podman exec un-votes-postgres psql -U user1 -d un_votes -c \
+"-- All resolutions voted in 2024
+SELECT * FROM un.resolution
+WHERE EXTRACT(YEAR FROM vote_date) = 2024
+LIMIT 5;"
 ```
 
-## Count the number of values in the resolution's field
+## Count the number of values in a resolution’s field
 
-For example, let's count the number of `committee_report` values for each resolution in descending order:
+For example, let’s count the number of `committee_report` values for each resolution in descending order:
 
-```sql
-SELECT resolution_id, COUNT(resolution_id) AS cnt 
-FROM resolution_committee_report 
-GROUP BY resolution_id 
-ORDER BY cnt DESC;
+```{code-cell}
+podman exec un-votes-postgres psql -U user1 -d un_votes -c \
+"-- How many committee reports each resolution has
+SELECT
+    resolution_id,
+    COUNT(*) AS cnt               -- number of committee reports
+FROM un.resolution_committee_report
+GROUP BY resolution_id
+ORDER BY cnt DESC
+LIMIT 5;"
 ```
 
 and filter only those resolutions that contain more than 2 `committee_report` values:
-```sql
-SELECT resolution_id, COUNT(*) AS cnt
-FROM resolution_committee_report
+
+```{code-cell}
+podman exec un-votes-postgres psql -U user1 -d un_votes -c \
+"-- Resolutions with more than 2 committee reports
+SELECT
+    resolution_id,
+    COUNT(*) AS cnt
+FROM un.resolution_committee_report
 GROUP BY resolution_id
-HAVING COUNT(*) > 2
-ORDER BY cnt DESC;
+HAVING COUNT(*) > 2               -- filter: keep only those with 3+ reports
+ORDER BY cnt DESC
+LIMIT 5;"
 ```
 
-## Show the `agenda` from a particular year
+## Show “agenda” from a particular year
 
-Let's see `agenda` in the General Assembly resolutions since 1983:
+Let’s see `agenda` in the General Assembly resolutions since 1983:
 
-```sql
-SELECT r.id as resolution, a.name as agenda, r.vote_date
+```{code-cell}
+podman exec un-votes-postgres psql -U user1 -d un_votes -c \
+"-- Agenda items for GA resolutions from 1983 onward
+SET search_path TO un;
+SELECT
+    r.id AS resolution,
+    a.name AS agenda,
+    r.vote_date
 FROM agenda a
 JOIN resolution_agenda ra ON a.id = ra.agenda_id
 JOIN resolution r ON r.id = ra.resolution_id
-WHERE EXTRACT(YEAR FROM r.vote_date) > 1982
-    AND R.symbol ~* '^a'
-ORDER BY r.vote_date;
+WHERE EXTRACT(YEAR FROM r.vote_date) >= 1983
+  AND r.symbol ~* '^a'            -- General Assembly only
+ORDER BY r.vote_date
+LIMIT 5;"
 ```
 
 and for the Security Council since 1985:
 
-```sql
-SELECT r.id as resolution, a.name as agenda, r.vote_date
+```{code-cell}
+podman exec un-votes-postgres psql -U user1 -d un_votes -c \
+"-- Agenda items for SC resolutions from 1985 onward
+SET search_path TO un;
+SELECT
+    r.id AS resolution,
+    a.name AS agenda,
+    r.vote_date
 FROM agenda a
 JOIN resolution_agenda ra ON a.id = ra.agenda_id
 JOIN resolution r ON r.id = ra.resolution_id
-WHERE EXTRACT(YEAR FROM r.vote_date) > 1984
-    AND R.symbol ~* '^s'
-ORDER BY r.vote_date;
+WHERE EXTRACT(YEAR FROM r.vote_date) >= 1985
+  AND r.symbol ~* '^s'            -- Security Council only
+ORDER BY r.vote_date
+LIMIT 5;"
 ```
 
 ## Save the result in csv
 
-For example, save the `subject` values into a special table:
+For example, save the `agenda` topics by year (extracting `subject` from agenda strings):
 
-```sql
++++
+
+``` sql
+-- Export subjects by year to CSV
+-- Note: only works for agenda strings that use the standardized format
 \copy (
-    SELECT DISTINCT ON (subject.name)         
-        subject.name AS subject,
-        EXTRACT(YEAR FROM resolution.vote_date) AS year
-    FROM agenda                                    
-    JOIN subject ON agenda.subject_id = subject.id                                                                         
-    JOIN resolution_agenda ON resolution_agenda.agenda_id = agenda.id 
-    JOIN resolution ON resolution.id = resolution_agenda.resolution_id
-    ORDER BY subject.name, year
+    SELECT DISTINCT ON (a.name)
+        substring(a.name FROM '^\S+\s+\d+[a-z]?\s+([^:]+):') AS subject,  -- extract text between item number and colon
+        EXTRACT(YEAR FROM r.vote_date) AS year
+    FROM agenda a
+    JOIN resolution_agenda ra ON a.id = ra.agenda_id
+    JOIN resolution r ON r.id = ra.resolution_id
+    WHERE a.name ~ '^\S+\s+\d+[a-z]?\s+[^:]+:'    -- only strings with extractable subject
+    ORDER BY a.name, year
 ) TO '~/UN_Analysis/subjects.csv' WITH CSV HEADER;
 ```
 
-# <b>Misc</b>
++++
+
+> **Note:** The standardized agenda format (`A/660 32 Subject : subtitle`) became common only from 1983 onward. Earlier resolutions do not have extractable subjects in this format — the regex filter `WHERE a.name ~ '...'` in the query above excludes them automatically.
+
+# Misc
 
 ## Indexes
 
-There are two B-Tree indexes created, one for year and another for month in `resolution` relation:
+Two B-Tree expression indexes are created automatically by the pipeline after each crawl:
 
-```sql
--- index for years
-CREATE INDEX year_b ON resolution(EXTRACT (YEAR FROM vote_date));
++++
 
--- index for months
-CREATE INDEX month_b ON resolution(EXTRACT (MONTH FROM vote_date));
+``` sql
+CREATE INDEX IF NOT EXISTS year_b ON resolution(EXTRACT(YEAR FROM vote_date));
+CREATE INDEX IF NOT EXISTS month_b ON resolution(EXTRACT(MONTH FROM vote_date));
 ```
+
++++
+
+These speed up queries that filter by year or month (e.g. `WHERE EXTRACT(YEAR FROM vote_date) = 2024`). A plain B-tree on `vote_date` would not help such queries — PostgreSQL cannot use a column index to satisfy an expression predicate.
+
+```{code-cell}
+podman exec un-votes-postgres psql -U user1 -d un_votes -c \
+"\di un.*"  | grep -E 'year_b|month_b'
+```
+
+<!-- #endregion -->
