@@ -14,6 +14,6 @@ For a detailed guide on how to install the database, understand its architecture
 
 - **Data Source:** [UN Digital Library](https://digitallibrary.un.org/search?c=Voting+Data&cc=Voting+Data&ln=en)
 - **Update Frequency:** Updated monthly to include newly voted resolutions.
-- **Key Features:** 12-table normalized PostgreSQL schema, covering resolutions, countries, vote choices, and agendas.
+- **Key Features:** 11-table normalized PostgreSQL schema, covering resolutions, countries, vote choices, and agendas.
 
 For current version statistics, see [RELEASE_NOTES.md](RELEASE_NOTES.md).
